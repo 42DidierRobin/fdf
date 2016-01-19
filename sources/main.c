@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/19 18:07:19 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/19 18:53:58 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ void		print_grid(t_grid **grid)
 	int			i;
 	int			j;
 
+	ft_putstr("height = ");
+	ft_putnbr((*grid)->height);
+	ft_putchar('\n');
+	ft_putstr("length = ");
+	ft_putnbr((*grid)->length);
+	ft_putchar('\n');
 	i = 0;
 	ft_putendl("Tableau enregistre :");
 	while (i < (*grid)->height)
@@ -26,7 +32,8 @@ void		print_grid(t_grid **grid)
 		while (j < (*grid)->length)
 		{
 			ft_putnbr((*grid)->tab[i][j]);
-			ft_putchar('-');
+			if (j + 1 < (*grid)->length)
+				ft_putchar('-');
 			j++;
 		}
 		ft_putchar('\n');
@@ -44,7 +51,10 @@ int		main(int argc, char **argv)
 	argc = argc + 1 - 1;
 	grid = read_it(argv[1]);
 	ft_putendl("Fin de read_stuff");
-	ft_putnbr(grid->height);
-	print_grid(&grid);
+	ft_putchar('\n');
+	if (grid)
+		print_grid(&grid);
+	else
+		ft_putendl("error");
 	return (0);
 }

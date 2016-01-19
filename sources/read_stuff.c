@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:42:55 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/19 18:16:34 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/19 18:53:55 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,27 @@
 static int			char_to_int_tab_help(t_grid **obj, char *line, int i)
 {
 	int		j;
-	char	**split_rec;
+	char	**split_ret;
 
 	ft_putendl("On rentre dans help");
 	j = -1;
 	(*obj)->tab[i] = (int*)malloc(sizeof(int) * (*obj)->length);
-	split_rec = ft_strsplit((const char*)line, SEPARATOR);
-	while (split_rec[++j])
+	split_ret = ft_strsplit((const char*)line, SEPARATOR);
+	while (split_ret[++j])
 	{
 		if (j > (*obj)->length)
 			return (0);
-		(*obj)->tab[i][j] = ft_atoi((const char*)split_rec[j]);
-		//ft_strdel(&(split_rec[j]));
-		split_rec[j] = NULL;
+		(*obj)->tab[i][j] = ft_atoi((const char*)split_ret[j]);
 	}
-	free(split_rec);
-	if (j < (*obj)->length)
+	if (j != (*obj)->length)
 		return (0);
-	return (1);
+	j = -1;
+	/* A DEBUGUER
+	while (split_ret[++j])
+		ft_strdel(&(split_ret[j]));
+	*/
 	ft_putendl("on sort de help");
+	return (1);
 }
 
 static int			char_to_int_tab(t_grid **obj, char **readed)
