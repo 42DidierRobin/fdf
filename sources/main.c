@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/19 16:46:13 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/19 17:54:16 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ void		print_grid(t_grid **grid)
 		{
 			ft_putnbr((*grid)->tab[i][j]);
 			ft_putchar('-');
+			j++;
 		}
 		ft_putchar('\n');
+		i++;
 	}
 	ft_putstr("fin du tableau\n");
 	ft_putchar('\n');
