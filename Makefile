@@ -6,14 +6,15 @@
 #    By: adespond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/18 14:14:20 by adespond          #+#    #+#              #
-#    Updated: 2016/01/19 15:42:09 by rdidier          ###   ########.fr        #
+#    Updated: 2016/01/19 15:51:05 by rdidier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	fdf
 
 SRC		=	includes/get_next_line/get_next_line.c	\
-			sources/main.c
+			sources/main.c							\
+			sources/read_stuff.c
 
 OBJ		=	$(patsubst src/%.c,./%.o,$(SRC))
 
