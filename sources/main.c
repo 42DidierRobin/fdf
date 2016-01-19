@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/19 17:54:16 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/19 18:07:19 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ int		main(int argc, char **argv)
 {
 	t_grid		*grid;
 
-	argc = argc;
-	grid = reat_it(argv[1]);
+	argc = argc + 1 - 1;
+	grid = read_it(argv[1]);
+	ft_putendl("Fin de read_stuff");
+	ft_putnbr(grid->height);
 	print_grid(&grid);
 	return (0);
 }
