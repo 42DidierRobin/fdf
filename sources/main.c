@@ -6,26 +6,28 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/19 18:53:58 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/20 13:48:48 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/file_de_fer.h"
 
 //TEMP
-void		print_grid(t_grid **grid)
+void		print_tests(t_grid **grid)
 {
 	int			i;
 	int			j;
 
-	ft_putstr("height = ");
+	ft_putendl("*-----* Demarrage des tests *-----*");
+	ft_putendl("*--- Lecture et transformation en Grille");
+	ft_putstr("	grid height = ");
 	ft_putnbr((*grid)->height);
 	ft_putchar('\n');
-	ft_putstr("length = ");
+	ft_putstr("	grid length = ");
 	ft_putnbr((*grid)->length);
 	ft_putchar('\n');
 	i = 0;
-	ft_putendl("Tableau enregistre :");
+	ft_putendl("	Tableau enregistre :");
 	while (i < (*grid)->height)
 	{
 		j = 0;
@@ -39,8 +41,33 @@ void		print_grid(t_grid **grid)
 		ft_putchar('\n');
 		i++;
 	}
-	ft_putstr("fin du tableau\n");
+	ft_putstr("		fin du tableau\n");
 	ft_putchar('\n');
+	
+
+	ft_putendl("*--- Creation de la fenetre");
+	t_mlx	*mlx;
+	mlx = init_window();
+
+	ft_putendl("*--- Creation et affichage de la map");
+	t_map	*map;
+	map = grid_to_map((*grid));
+	print_map(map, mlx);
+	
+	ft_putendl("*--- Impression d'une ligne");
+	t_pix *a = (t_pix*)malloc(sizeof(t_pix));
+	t_pix *b = (t_pix*)malloc(sizeof(t_pix));
+
+	a->x = 100;
+	a->y = 100;
+	a->rgb = 0xFF0000;
+	b->x = 200;
+	b->y = 1000;
+	b->rgb = 0x00FF00;
+	draw_line(mlx, a, b);
+
+	ft_putendl("!!! MISE EN BOUCLE INFINIE !!!");
+	mlx_loop(mlx->mlx_ptr);
 }
 //TEMP
 
@@ -48,13 +75,16 @@ int		main(int argc, char **argv)
 {
 	t_grid		*grid;
 
-	argc = argc + 1 - 1;
-	grid = read_it(argv[1]);
-	ft_putendl("Fin de read_stuff");
-	ft_putchar('\n');
-	if (grid)
-		print_grid(&grid);
+	if (argc != 2)
+		ft_putendl("Error : nbr of argument(s)");
 	else
-		ft_putendl("error");
+	{
+		grid = read_it(argv[1]);
+		ft_putchar('\n');
+		if (grid)
+			print_tests(&grid);
+		else
+			ft_putendl("Error : incorrect file");
+	}
 	return (0);
 }

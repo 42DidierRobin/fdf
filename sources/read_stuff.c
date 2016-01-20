@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:42:55 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/19 18:53:55 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/20 10:31:26 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int			char_to_int_tab_help(t_grid **obj, char *line, int i)
 	int		j;
 	char	**split_ret;
 
-	ft_putendl("On rentre dans help");
 	j = -1;
 	(*obj)->tab[i] = (int*)malloc(sizeof(int) * (*obj)->length);
 	split_ret = ft_strsplit((const char*)line, SEPARATOR);
@@ -34,7 +33,6 @@ static int			char_to_int_tab_help(t_grid **obj, char *line, int i)
 	while (split_ret[++j])
 		ft_strdel(&(split_ret[j]));
 	*/
-	ft_putendl("on sort de help");
 	return (1);
 }
 
@@ -51,8 +49,6 @@ static int			char_to_int_tab(t_grid **obj, char **readed)
 	i = -1;
 	while (readed[++i])
 	{
-		ft_putstr("Readed[i] = ");
-		ft_putendl(readed[i]);
 		if(!(char_to_int_tab_help(obj, readed[i], i)))
 			return (0);
 	}
@@ -78,7 +74,6 @@ t_grid				*read_it(char *file_name)
 	ret->height = i;
 	ret->tab = (int**)malloc(sizeof(int*) * i + 1);
 	ret->tab[i + 1] = NULL;
-	ft_putendl("fin de la lecture");
 	err = char_to_int_tab(&ret, tab);
 	i = -1;
 	while (tab[++i])

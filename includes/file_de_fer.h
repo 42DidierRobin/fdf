@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:17:07 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/19 18:54:21 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/20 13:41:37 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,39 @@
 #include <math.h>
 #include "libft/libft.h"
 #include "get_next_line/get_next_line.h"
+#include "mlx.h"
 
 #define TAB_SIZE_MAX 1000
 #define SEPARATOR ' '
+#define WINDOW_L 600
+#define WINDOW_W 1200
+#define MAP_MARGIN_L 150
+#define MAP_MARGIN_H 150
+#define PIX_MARGIN 25
+#define SHARPNESS 0.1
+
+typedef struct		s_pix
+{
+	int		x;
+	int		y;
+	int		z;
+	int		rgb;
+}					t_pix;
+
+typedef struct		s_mlx
+{
+	void	*mlx_ptr;
+	void	*mlx_win;
+}					t_mlx;
+
+typedef struct		s_map
+{
+	struct s_pix	**map;
+	int				nbr_pix_l;
+	int				nbr_pix_h;
+	int				border_l;
+	int				border_h;
+}					t_map;
 
 typedef struct		s_grid
 {
@@ -32,6 +62,10 @@ typedef struct		s_grid
 	int		height;
 }					t_grid;
 
+void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b);
+t_mlx			*init_window(void);
+void			print_map(t_map *map, t_mlx *mlx);
+t_map			*grid_to_map(t_grid *grid);
 t_grid			*read_it(char *file_name);
 
 #endif
