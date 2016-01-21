@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:17:07 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/20 13:41:37 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/21 16:10:02 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 #define MAP_MARGIN_L 150
 #define MAP_MARGIN_H 150
 #define PIX_MARGIN 25
-#define SHARPNESS 0.1
 
 typedef struct		s_pix
 {
@@ -63,9 +62,17 @@ typedef struct		s_grid
 }					t_grid;
 
 void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b);
+
+void			draw_map(t_mlx *mlx, t_map *map);
+
 t_mlx			*init_window(void);
+
+t_pix			*new_pix(int x, int y, int z, int clr);
+void			put_pix(t_mlx *mlx, t_pix *pix);
+
 void			print_map(t_map *map, t_mlx *mlx);
 t_map			*grid_to_map(t_grid *grid);
 t_grid			*read_it(char *file_name);
+	char	*yo;
 
 #endif

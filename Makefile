@@ -6,7 +6,7 @@
 #    By: adespond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/18 14:14:20 by adespond          #+#    #+#              #
-#    Updated: 2016/01/20 13:21:27 by rdidier          ###   ########.fr        #
+#    Updated: 2016/01/21 16:27:24 by rdidier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC		=	includes/get_next_line/get_next_line.c	\
 			sources/read_stuff.c					\
 			sources/window.c						\
 			sources/pixels.c						\
-			sources/draw.c							\
+			sources/draw_map.c						\
 
 OBJ		=	$(patsubst src/%.c,./%.o,$(SRC))
 
@@ -28,8 +28,7 @@ MAP		=	maps/42.fdf
 .SILENT:
 
 $(NAME): $(OBJ)
-	gcc $(FLAG) $(OBJ) -I /usr/X11/include -g -L/usr/X11/lib \
-		-lmlx -lXext -lX11 -L includes/libft/ -lft -o $(NAME)
+	gcc $(FLAG) $(OBJ)  -L/usr/local/lib -lmlx -L includes/libft/ -lft -o $(NAME)
 	printf '\033[4m'
 	printf '\033[32m[ ✔ ] %s\n\033[0m' "fdf is done !"
 ./%.o: src/%.c

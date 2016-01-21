@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/20 13:48:48 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/21 16:15:16 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,24 @@ void		print_tests(t_grid **grid)
 	t_mlx	*mlx;
 	mlx = init_window();
 
-	ft_putendl("*--- Creation et affichage de la map");
+	ft_putendl("*--- Creation de la map");
 	t_map	*map;
 	map = grid_to_map((*grid));
-	print_map(map, mlx);
 	
 	ft_putendl("*--- Impression d'une ligne");
 	t_pix *a = (t_pix*)malloc(sizeof(t_pix));
 	t_pix *b = (t_pix*)malloc(sizeof(t_pix));
 
-	a->x = 100;
-	a->y = 100;
+	a->x = -50;
+	a->y = -50;
 	a->rgb = 0xFF0000;
-	b->x = 200;
-	b->y = 1000;
+	b->x = 0;
+	b->y = 350;
 	b->rgb = 0x00FF00;
 	draw_line(mlx, a, b);
 
+	ft_putendl("*--- Impression de la map");
+	draw_map(mlx, map);
 	ft_putendl("!!! MISE EN BOUCLE INFINIE !!!");
 	mlx_loop(mlx->mlx_ptr);
 }

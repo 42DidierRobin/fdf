@@ -6,11 +6,39 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:42:55 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/20 10:31:26 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/21 16:14:16 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/file_de_fer.h"
+
+t_map				*grid_to_map(t_grid *grid)
+{
+	t_map		*map;
+	int			i;
+	int			j;
+
+	i = -1;
+	map = (t_map*)malloc(sizeof(t_map));
+	map->nbr_pix_l = grid->length;
+	map->nbr_pix_h = grid->height;
+	map->map = (t_pix**)malloc(sizeof(t_pix*) * map->nbr_pix_h);
+	while (++i < map->nbr_pix_h)
+		map->map[i] = (t_pix*)malloc(sizeof(t_pix) * map->nbr_pix_l);
+	i = -1;
+	while (++i < map->nbr_pix_h)
+	{
+		j = -1;
+		while (++j < map->nbr_pix_l)
+		{
+			map->map[i][j].y = i * PIX_MARGIN;
+			map->map[i][j].x = j * PIX_MARGIN;
+			map->map[i][j].z = grid->tab[i][j];
+			map->map[i][j].rgb = 0xFF0000;
+		}
+	}
+	return (map);
+}
 
 static int			char_to_int_tab_help(t_grid **obj, char *line, int i)
 {
@@ -30,9 +58,9 @@ static int			char_to_int_tab_help(t_grid **obj, char *line, int i)
 		return (0);
 	j = -1;
 	/* A DEBUGUER
-	while (split_ret[++j])
-		ft_strdel(&(split_ret[j]));
-	*/
+	   while (split_ret[++j])
+	   ft_strdel(&(split_ret[j]));
+	   */
 	return (1);
 }
 
