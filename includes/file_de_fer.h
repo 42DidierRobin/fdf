@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:17:07 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/21 16:10:02 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/21 16:48:46 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ t_mlx			*init_window(void);
 t_pix			*new_pix(int x, int y, int z, int clr);
 void			put_pix(t_mlx *mlx, t_pix *pix);
 
-void			print_map(t_map *map, t_mlx *mlx);
 t_map			*grid_to_map(t_grid *grid);
 t_grid			*read_it(char *file_name);
 	char	*yo;
