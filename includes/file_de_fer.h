@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:17:07 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/22 12:28:21 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/22 12:46:52 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,17 @@ typedef struct		s_map
 	struct s_pix	***map;
 }					t_map;
 
-void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b);
+// Read.c
+t_map			*read_it(char *file_name);
 
+// Window.c
 t_mlx			*init_window(void);
 
+// Draw.c
+void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b);
+
+// Pixels.c
 t_pix			*new_pix(int x, int y, int z, int clr);
 void			put_pix(t_mlx *mlx, t_pix *pix);
-
-t_map			*read_it(char *file_name);
 
 #endif
