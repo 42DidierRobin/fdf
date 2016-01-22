@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:17:07 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/21 16:48:46 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/22 12:28:21 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,31 +47,16 @@ typedef struct		s_mlx
 
 typedef struct		s_map
 {
-	struct s_pix	**map;
-	int				nbr_pix_l;
-	int				nbr_pix_h;
-	int				border_l;
-	int				border_h;
+	struct s_pix	***map;
 }					t_map;
 
-typedef struct		s_grid
-{
-	int		**tab;
-	int		length;
-	int		height;
-}					t_grid;
-
 void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b);
-
-void			draw_map(t_mlx *mlx, t_map *map);
 
 t_mlx			*init_window(void);
 
 t_pix			*new_pix(int x, int y, int z, int clr);
 void			put_pix(t_mlx *mlx, t_pix *pix);
 
-t_map			*grid_to_map(t_grid *grid);
-t_grid			*read_it(char *file_name);
-	char	*yo;
+t_map			*read_it(char *file_name);
 
 #endif

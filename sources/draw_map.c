@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 12:20:18 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/21 16:29:57 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/22 12:27:55 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,5 @@ void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b)
 		//rajouter la couleur
 	}
 	free(pix);
-}
-
-void			draw_map(t_mlx *mlx, t_map *map)
-{
-	int			i;
-	int			j;
-
-	i = -1;
-	while (++i < map->nbr_pix_h)
-	{
-		j = -1;
-		while (++j < map->nbr_pix_l - 1)
-			draw_line(mlx, &(map->map[i][j]), &(map->map[i][j + 1]));
-	}
-	j = -1;
-	while (++j < map->nbr_pix_l)
-	{
-		i = -1;
-		while (++i < map->nbr_pix_h - 1)
-			draw_line(mlx, &(map->map[i][j]), &(map->map[i + 1][j]));
-	}
 }
 
