@@ -6,7 +6,7 @@
 #    By: adespond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/18 14:14:20 by adespond          #+#    #+#              #
-#    Updated: 2016/01/21 16:48:40 by rdidier          ###   ########.fr        #
+#    Updated: 2016/01/22 12:42:12 by rdidier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=	fdf
 
 SRC		=	includes/get_next_line/get_next_line.c	\
 			sources/main.c							\
-			sources/read_stuff.c					\
+			sources/read_file.c					\
 			sources/window.c						\
 			sources/pixels.c						\
 			sources/draw_map.c						\
