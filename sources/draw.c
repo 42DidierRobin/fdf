@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 12:20:18 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/22 12:27:55 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/31 19:17:06 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b)
 	t_pix		*pix;
 
 	i = -1;
-	pix = new_pix(a->x, a->y, a->z, a->rgb);
+	pix = new_pix(a->x, a->y, 0xFF0000);
 	if (abs(a->x - b->x) <= abs(a->y - b->y))
 		step = 1 + abs(a->y - b->y);
 	else 
@@ -38,3 +38,45 @@ void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b)
 	free(pix);
 }
 
+static void		draw_map_column(t_mlx *mlx, t_map *map, int j)
+{
+		int	i;
+
+		i = 0;
+		while (map->map[i + 1])
+		{
+			draw_line(mlx, map->map[i][j], map->map[i + 1][j]);
+			ft_putnbr(map->map[i][j]->x);
+			i++;
+		}
+}
+
+static void		draw_map_line(t_mlx *mlx, t_map *map, int i)
+{
+		int	j;
+
+		j = 0;
+		while (map->map[i][j + 1])
+		{
+			draw_line(mlx, map->map[i][j], map->map[i][j + 1]);
+			j++;
+		}
+}
+
+void			draw_map(t_mlx *mlx, t_map *map)
+{
+	int i;
+
+	i = 0;
+	while (map->map[i])
+	{
+		draw_map_line(mlx, map, i);
+		i++;
+	}
+	i = 0;
+	while (map->map[0][i])
+	{
+		draw_map_column(mlx, map, i);
+		i++;
+	}
+}

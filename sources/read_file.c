@@ -6,13 +6,13 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:42:55 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/22 12:41:45 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/31 18:42:29 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/file_de_fer.h"
 
-static void			readed_to_map(t_map **obj, char **readed)
+static void			readed_to_map(int ***tab, char **readed)
 {
 	int			i;
 	int			j;
@@ -25,28 +25,29 @@ static void			readed_to_map(t_map **obj, char **readed)
 		length = 0;
 		split_ret = ft_strsplit((char const*)readed[i], SEPARATOR);
 		while (split_ret[++length]);
-		(*obj)->map[i] = (t_pix**)malloc(sizeof(t_pix*) * length);
-		(*obj)->map[i][length] = NULL;
+		tab[i] = (int**)malloc(sizeof(int*) * length);	
+		tab[i][length] = NULL;
 		j = -1;
 		while (++j < length)
 		{
-			(*obj)->map[i][j] = new_pix(j, i, ft_atoi(split_ret[j]), 0);
+			(tab[i][j]) = (int*)malloc(sizeof(int));
+			*(tab[i][j]) = ft_atoi(split_ret[j]);
 			ft_strdel(&split_ret[j]);
 		}
 	}
 	free(split_ret);
 }
 
-t_map				*read_it(char *file_name)
+//	Retourne le tableau de int lu delimite par des pointeurs nulls. (donnee temporaire)
+int				***read_it(char *file_name)
 {
-	t_map		*ret;
+	int			***ret;
 	int			fd;
 	int			gnl_ret;
 	int			i;
 	char		**tab;
 
 	i = -1;
-	ret = (t_map*)malloc(sizeof(t_map));
 	tab = (char**)malloc(sizeof(char*) * TAB_SIZE_MAX);
 	fd = open(file_name, O_RDONLY);
 	while ((gnl_ret = get_next_line(fd, &(tab[++i]))))
@@ -55,9 +56,9 @@ t_map				*read_it(char *file_name)
 			return (NULL);
 	}
 	tab[i] = NULL;
-	ret->map = (t_pix***)malloc(sizeof(t_pix**) * i);
-	ret->map[i] = NULL;
-	readed_to_map(&ret, tab);
+	ret = (int***)malloc(sizeof(int**) * i);
+	ret[i] = NULL;
+	readed_to_map(ret, tab);
 	i = -1;
 	while (tab[++i])
 		ft_strdel(&(tab[i]));

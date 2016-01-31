@@ -6,7 +6,7 @@
 #    By: adespond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/18 14:14:20 by adespond          #+#    #+#              #
-#    Updated: 2016/01/22 12:42:12 by rdidier          ###   ########.fr        #
+#    Updated: 2016/01/31 19:04:43 by rdidier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,13 @@ NAME	=	fdf
 
 SRC		=	includes/get_next_line/get_next_line.c	\
 			sources/main.c							\
-			sources/read_file.c					\
+			sources/read_file.c						\
 			sources/window.c						\
 			sources/pixels.c						\
-			sources/draw_map.c						\
+			sources/draw.c							\
+			sources/camera.c						\
+			sources/map.c							\
+			sources/math.c
 
 OBJ		=	$(patsubst src/%.c,./%.o,$(SRC))
 

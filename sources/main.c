@@ -6,33 +6,32 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/22 12:40:37 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/31 19:27:33 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/file_de_fer.h"
 
 //TEMP
-void		print_tests(t_map **m)
+void		print_tests(int ****r)
 {
 	int			i;
 	int			j;
-	t_map		*map;
+	int			***readed;
 
-	map = *m;
+	readed = *r;
 	ft_putendl("*-----* Demarrage des tests *-----*");
-	ft_putendl("*--- Lecture et transformation en MAP");
+	ft_putendl("*--- Lecture du tableau de int ");
 	i = 0;
-	ft_putendl("	Tableau de pix enregistre :");
-	while (map->map[i] != NULL)
+	while (readed[i] != NULL)
 	{
 		j = 0;
-		while (map->map[i][j] != NULL)
+		while (readed[i][j] != NULL)
 		{
-			ft_putnbr(map->map[i][j]->z);
-			if (map->map[i][j + 1] != NULL && map->map[i][j+1]->z != 0)
+			ft_putnbr(*(readed[i][j]));
+			if (readed[i][j + 1] != NULL && *(readed[i][j+1]) != 0)
 				ft_putstr(".");
-			else if (map->map[i][j + 1] != NULL && map->map[i][j+1]->z == 0)
+			else if (readed[i][j + 1] != NULL && *(readed[i][j+1]) == 0)
 				ft_putstr("..");
 			j++;
 		}
@@ -52,31 +51,59 @@ void		print_tests(t_map **m)
 
 	a->x = -50;
 	a->y = -50;
-	a->rgb = 0xFF0000;
 	b->x = 0;
 	b->y = 350;
-	b->rgb = 0x00FF00;
-	//draw_line(mlx, a, b);
+	draw_line(mlx, a, b);
 
-	ft_putendl("*--- Impression de la map");
-	//draw_map(mlx, map);
+	ft_putendl("*--- Transformation tableau int to matrix ");
+	t_map		*map;
+	t_3Dpoint	*from;
+	t_3Dpoint	*to;
+	t_cam		*cam;
+
+	from = new_3Dpoint(0, 0, 100);
+	to = new_3Dpoint(0, 0, -50);
+	cam = new_cam(from, to, 0.6); 
+	map = new_map(readed, cam);
+
+	ft_putendl("*--- Impression map ");
+	i = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			ft_putstr("(");
+			ft_putnbr(map->map[i][j]->x);
+			ft_putstr(";");
+			ft_putnbr(map->map[i][j]->y);
+			ft_putendl(")");
+			j++;
+		}
+		i++;
+	}
+
+	ft_putendl("*--- Affichage map ");
+	draw_map(mlx, map);
+	t_pix *gaetrym = new_pix(250,350, 0xFFFF00);
+	put_pix(mlx, gaetrym);
 	ft_putendl("!!! MISE EN BOUCLE INFINIE !!!");
-	//mlx_loop(mlx->mlx_ptr);
+	mlx_loop(mlx->mlx_ptr);
 }
 //TEMP
 
 int		main(int argc, char **argv)
 {
-	t_map		*map;
+	int		***readed;
 
 	if (argc != 2)
 		ft_putendl("Error : nbr of argument(s)");
 	else
 	{
-		map = read_it(argv[1]);
+		readed = read_it(argv[1]);
 		ft_putchar('\n');
-		if (map)
-			print_tests(&map);
+		if (readed)
+			print_tests(&readed);
 		else
 			ft_putendl("Error : incorrect file. You may want to check the max size of tab in define");
 	}

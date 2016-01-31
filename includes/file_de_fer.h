@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:17:07 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/22 12:46:52 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/01/31 19:05:43 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,32 @@
 #define SEPARATOR ' '
 #define WINDOW_L 600
 #define WINDOW_W 1200
-#define MAP_MARGIN_L 150
-#define MAP_MARGIN_H 150
-#define PIX_MARGIN 25
+#define MARGE_L 150
+#define MARGE_W 150
+#define	PAS		5
+
+typedef struct		s_3Dpoint
+{
+	int		x;
+	int		y;
+	int		z;
+}					t_3Dpoint;
+
+typedef struct		s_cam
+{
+	struct s_3Dpoint	*from;
+	struct s_3Dpoint	*to;
+	double				fov;
+	int					plan[4];
+
+}					t_cam;
 
 typedef struct		s_pix
 {
 	int		x;
 	int		y;
-	int		z;
-	int		rgb;
+//	int		z;
+//	t_color	color;
 }					t_pix;
 
 typedef struct		s_mlx
@@ -47,20 +63,33 @@ typedef struct		s_mlx
 
 typedef struct		s_map
 {
+	t_pix			*center;
 	struct s_pix	***map;
 }					t_map;
 
+// Camera.c
+t_3Dpoint		*new_3Dpoint(int x, int y, int z);
+t_cam			*new_cam(t_3Dpoint *ori, t_3Dpoint *fuite, double fov);
+
+// Map.c
+t_map			*new_map(int ***readed, t_cam *cam);
+
 // Read.c
-t_map			*read_it(char *file_name);
+int				***read_it(char *file_name);
 
 // Window.c
 t_mlx			*init_window(void);
 
+// math.c
+double			give_angle(t_3Dpoint *u, t_3Dpoint *v);
+t_3Dpoint		*vector_on_screen(t_3Dpoint *u, t_cam *cam);
+
 // Draw.c
+void			draw_map(t_mlx *mlx, t_map *map);
 void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b);
 
 // Pixels.c
-t_pix			*new_pix(int x, int y, int z, int clr);
+t_pix			*new_pix(int x, int y, int clr);
 void			put_pix(t_mlx *mlx, t_pix *pix);
 
 #endif
