@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 16:30:10 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/31 18:34:02 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/01 19:28:07 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ t_cam				*new_cam(t_3Dpoint *ori, t_3Dpoint *fuite,  double fov)
 	ret->plan[1] = ret->to->y - ret->from->y;
 	ret->plan[2] = ret->to->z - ret->from->z;
 	ret->plan[3] = - (ret->plan[0] * ret->from->x + ret->plan[1] * ret->from->y
-			+ ret->plan[2] *ret->from->z);
+			+ ret->plan[2] * ret->from->z);
 	return (ret);
 }

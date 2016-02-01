@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:17:07 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/31 19:05:43 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/01 19:32:34 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 #include "libft/libft.h"
 #include "get_next_line/get_next_line.h"
 #include "mlx.h"
+
+//INTERDIT
+#include <stdio.h>
 
 #define TAB_SIZE_MAX 1000
 #define SEPARATOR ' '
@@ -82,6 +85,7 @@ t_mlx			*init_window(void);
 
 // math.c
 double			give_angle(t_3Dpoint *u, t_3Dpoint *v);
+double			give_angle_test(t_3Dpoint *u, t_3Dpoint *v);
 t_3Dpoint		*vector_on_screen(t_3Dpoint *u, t_cam *cam);
 
 // Draw.c

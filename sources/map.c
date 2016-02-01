@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 10:02:35 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/31 19:27:21 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/01 19:32:45 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,20 @@ t_pix				*point_to_pix(t_cam *cam, int x, int y, int z)
 	t_3Dpoint	*vector1;
 	t_3Dpoint	*vector2;
 	t_3Dpoint	*temp;
-	double		angleOx;
-	double		angleOz;
+	double		angle1;
+	double		angle2;
 
 	temp = new_3Dpoint(0, 1, 0);
 	vector1 = new_3Dpoint(cam->plan[0], cam->plan[1], cam->plan[2]);
 	vector2 = new_3Dpoint(x - cam->from->x, y - cam->from->y,
 			z - cam->from->z);
 	ret = (t_pix*)malloc(sizeof(t_pix));
-	angleOx = fabs(give_angle(vector1, vector2) 
-			* ((WINDOW_L) / 2) / cam->fov);
-	angleOz = give_angle(temp, vector_on_screen(new_3Dpoint(x, y, z), cam));
-	ret->x = (WINDOW_L) / 2 + (int)(angleOx * cos(angleOz));
-	ret->y = (WINDOW_L) / 2 + (int)(angleOx * sin(angleOz));
+	angle1 = fabs(give_angle(vector1, vector2)); 
+	angle2 = give_angle_test(temp, vector_on_screen(new_3Dpoint(x, y, z), cam));
+	printf("point (%d, %d). Angle1 = %f, angle2 = %f", x/PAS, y/PAS, angle1 * 57.2958, angle2 * 57.2958);
+	angle1 = angle1 * ((WINDOW_L) / 2) / cam->fov;
+	ret->x = MARGE_L + (int)(angle1 * cos(angle2));
+	ret->y = MARGE_W + (int)(angle1 * sin(angle2));
 	return (ret);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/31 19:27:33 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/01 19:37:17 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,23 @@ void		print_tests(int ****r)
 	t_3Dpoint	*to;
 	t_cam		*cam;
 
-	from = new_3Dpoint(0, 0, 100);
+	from = new_3Dpoint(10, 10, 100);
 	to = new_3Dpoint(0, 0, -50);
 	cam = new_cam(from, to, 0.6); 
 	map = new_map(readed, cam);
 
+	t_3Dpoint *test;
+
+	test = vector_on_screen(new_3Dpoint(1,1,10), cam);
+	ft_putendl("test de vector on screen");
+	ft_putstr("Coordonnees : ( ");
+	ft_putnbr(test->x);
+	ft_putstr(" ; ");
+	ft_putnbr(test->y);
+	ft_putstr("; ");
+	ft_putnbr(test->z);
+	ft_putendl(" )");
+/*
 	ft_putendl("*--- Impression map ");
 	i = 0;
 	while (map->map[i])
@@ -82,7 +94,7 @@ void		print_tests(int ****r)
 		}
 		i++;
 	}
-
+*/
 	ft_putendl("*--- Affichage map ");
 	draw_map(mlx, map);
 	t_pix *gaetrym = new_pix(250,350, 0xFFFF00);
