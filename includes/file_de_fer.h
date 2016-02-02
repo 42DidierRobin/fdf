@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:17:07 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/02 14:42:08 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/02 15:25:19 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@
 // Coordonnees dite homogene. 
 typedef struct		s_3Dpoint
 {
-	int		x;
-	int		y;
-	int		z;
-	int		t;
+	double		x;
+	double		y;
+	double		z;
+	double		t;
 }					t_3Dpoint;
 
 typedef struct		s_cam
@@ -69,16 +69,18 @@ typedef struct		s_map
 }					t_map;
 
 //Matrix.c
-int				**give_null_matrix(int size);
-int				**give_homothety_matrix(int factor);
-int				**give_translation_matrix(t_3Dpoint *vector);
-int				**add_matrix(int **m, int **n, int size);
-int				**mult_matrix(int **m, int **n, int size);
+double			**give_null_matrix(int size);
+double			**give_homothety_matrix(int factor);
+double			**give_translation_matrix(t_3Dpoint *vector);
+double			**add_matrix(int **m, int **n, int size);
+double			**mult_matrix(int **m, int **n, int size);
 
-void			apply_matrix(t_3Dpoint *point, int m[4][4]);
+//Matrix_2.c
+double			**give_rotation_matrix(t_3Dpoint *vector, double a);
+void			matrix_on_point(t_3Dpoint *point, int m[4][4]);
 
-// Camera.c
-t_3Dpoint		*new_3Dpoint(int x, int y, int z);
+//Math_plan.c
+t_3Dpoint		*new_3Dpoint(double x, double y, double z);
 
 // Map.c
 t_map			*new_map(int ***readed, t_cam *cam);

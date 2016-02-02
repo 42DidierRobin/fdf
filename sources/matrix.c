@@ -6,31 +6,33 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 12:27:04 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/02 14:42:33 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/02 15:28:45 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/file_de_fer.h"
 
-int			**give_null_matrix(int size)
+double			**give_null_matrix(int size)
 {
-	int[size][size]	ret;
-	int				i;
-	int				j;
+	double				**ret;
+	int					i;
+	int					j;
 
+	ret = (double**)malloc(sizeof(double*) * size);
 	i = -1;
 	while (++i < size)
 	{
 		j = -1;
+		ret[i] = (double*)malloc(sizeof(double) * size);
 		while (++j < size)
 			ret[i][j] = 0;
 	}
 	return (ret);
 }
 
-int[4][4]	give_translation_matrix(t_3Dpoint *vector)
+double			**give_translation_matrix(t_3Dpoint *vector)
 {
-	int[4][4]	ret;
+	double	**ret;
 
 	ret = give_null_matrix(4);
 	ret[0][0] = 1;
@@ -43,9 +45,9 @@ int[4][4]	give_translation_matrix(t_3Dpoint *vector)
 	return (ret);
 }
 	
-int[4][4]	give_homothety_matrix(int factor)
+double			**give_homothety_matrix(int factor)
 {
-	int[4][4]	ret;
+	double	**ret;
 
 	ret = give_null_matrix(4);
 	ret[0][0] = factor;
@@ -55,12 +57,13 @@ int[4][4]	give_homothety_matrix(int factor)
 	return (ret);
 }
 
-int			**mult_matrix(int **m, int **n, int size)
+double			**mult_matrix(int **m, int **n, int size)
 {
-	int[size][size]	ret;
-	int				i;
-	int				j;
+	double				**ret;
+	int					i;
+	int					j;
 
+	ret = give_null_matrix(size);
 	i = -1;
 	while (++i < size)
 	{
@@ -71,12 +74,13 @@ int			**mult_matrix(int **m, int **n, int size)
 	return (ret);
 }
 
-int			**add_matrix(int **m, int **n, int size)
+double			**add_matrix(int **m, int **n, int size)
 {
-	int[size][size]	ret;
-	int				i;
-	int				j;
+	double				**ret;
+	int					i;
+	int					j;
 
+	ret = give_null_matrix(size);
 	i = -1;
 	while (++i < size)
 	{

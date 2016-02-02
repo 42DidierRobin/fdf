@@ -6,13 +6,30 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/02 12:48:27 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/02 16:18:22 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/file_de_fer.h"
 
 //TEMP
+
+void		print_matrix(int size, double **m)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < size)
+	{
+		j = -1;
+		while (++j < size)
+		{
+			printf("%f -- ",m[i][j]);
+		}
+		printf("\n");
+	}
+}
 
 void		print_point(t_3Dpoint *point)
 {
@@ -55,37 +72,29 @@ void		print_tests(int ****r)
 
 	ft_putendl("*--- Test des fonctions de math");
 	t_3Dpoint	*p1;
-	int			m_identite[3][3];
-	int			m_translation[3][3];
+	t_3Dpoint	*p2;
 
-	m_identite[0][0] = 1;
-	m_identite[0][1] = 0;
-	m_identite[0][2] = 0;
-	m_identite[1][0] = 0;
-	m_identite[1][1] = 1;
-	m_identite[1][2] = 0;
-	m_identite[2][0] = 0;
-	m_identite[2][1] = 0;
-	m_identite[2][2] = 1;
+	p1 = new_3Dpoint(- 0.33, 0.66, 0.66);
+	double	 **m1;
+	m1 = give_rotation_matrix(p1, 1.29);
+	ft_putendl("Matrice Rotation avec ∂ = 1.29 (74) et");
+	ft_putstr("Vecteur unitaire de reference = ");
+	print_point(p1);
+	print_matrix(4, m1);
 	
-	m_translation[0][0] = 1;
-	m_translation[0][1] = 1;
-	m_translation[0][2] = 1;
-	m_translation[1][0] = 1;
-	m_translation[1][1] = 1;
-	m_translation[1][2] = 1;
-	m_translation[2][0] = 1;
-	m_translation[2][1] = 1;
-	m_translation[2][2] = 1;
-	p1 = new_3Dpoint(1,2,3);
+	ft_putchar('\n');
+	p2 = new_3Dpoint(1, 0, 0);
+	double	 **m2;
+	m2 = give_rotation_matrix(p2, -0.52);
+	ft_putendl("Matrice Rotation avec ∂ = -0.52 (-30) et");
+	ft_putstr("Vecteur unitaire de reference = ");
+	print_point(p2);
+	print_matrix(4, m2);
 
-	print_point(p1);
-	ft_putstr("Matrice identite : ");
-	point_to_matrix(p1, m_identite);
-	print_point(p1);
-	ft_putstr("Matrice test : ");
-	point_to_matrix(p1, m_translation);
-	print_point(p1);
+	ft_putchar('\n');
+	double **m3;
+	m3 = give_homothety_matrix(42);
+	print_matrix(4, m3);
 
 /*
 	ft_putendl("*--- Creation de la fenetre");
