@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:17:07 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/01 19:32:34 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/02 14:42:08 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,17 @@
 #define MARGE_W 150
 #define	PAS		5
 
+// Coordonnees dite homogene. 
 typedef struct		s_3Dpoint
 {
 	int		x;
 	int		y;
 	int		z;
+	int		t;
 }					t_3Dpoint;
 
 typedef struct		s_cam
 {
-	struct s_3Dpoint	*from;
-	struct s_3Dpoint	*to;
-	double				fov;
-	int					plan[4];
 
 }					t_cam;
 
@@ -70,9 +68,17 @@ typedef struct		s_map
 	struct s_pix	***map;
 }					t_map;
 
+//Matrix.c
+int				**give_null_matrix(int size);
+int				**give_homothety_matrix(int factor);
+int				**give_translation_matrix(t_3Dpoint *vector);
+int				**add_matrix(int **m, int **n, int size);
+int				**mult_matrix(int **m, int **n, int size);
+
+void			apply_matrix(t_3Dpoint *point, int m[4][4]);
+
 // Camera.c
 t_3Dpoint		*new_3Dpoint(int x, int y, int z);
-t_cam			*new_cam(t_3Dpoint *ori, t_3Dpoint *fuite, double fov);
 
 // Map.c
 t_map			*new_map(int ***readed, t_cam *cam);
@@ -82,11 +88,6 @@ int				***read_it(char *file_name);
 
 // Window.c
 t_mlx			*init_window(void);
-
-// math.c
-double			give_angle(t_3Dpoint *u, t_3Dpoint *v);
-double			give_angle_test(t_3Dpoint *u, t_3Dpoint *v);
-t_3Dpoint		*vector_on_screen(t_3Dpoint *u, t_cam *cam);
 
 // Draw.c
 void			draw_map(t_mlx *mlx, t_map *map);

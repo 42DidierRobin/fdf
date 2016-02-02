@@ -6,7 +6,7 @@
 #    By: adespond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/18 14:14:20 by adespond          #+#    #+#              #
-#    Updated: 2016/02/01 19:33:45 by rdidier          ###   ########.fr        #
+#    Updated: 2016/02/02 14:12:08 by rdidier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,9 @@ SRC		=	includes/get_next_line/get_next_line.c	\
 			sources/pixels.c						\
 			sources/draw.c							\
 			sources/camera.c						\
+			sources/math.c							\
+			sources/matrix.c						\
 			sources/map.c							\
-			sources/math.c
 
 OBJ		=	$(patsubst src/%.c,./%.o,$(SRC))
 

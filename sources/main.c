@@ -6,13 +6,25 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/01 19:37:17 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/02 12:48:27 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/file_de_fer.h"
 
 //TEMP
+
+void		print_point(t_3Dpoint *point)
+{
+	ft_putstr("Coordonne du point : (");
+	ft_putnbr(point->x);
+	ft_putstr(";");
+	ft_putnbr(point->y);
+	ft_putstr(";");
+	ft_putnbr(point->z);
+	ft_putendl(")");
+}
+
 void		print_tests(int ****r)
 {
 	int			i;
@@ -41,6 +53,41 @@ void		print_tests(int ****r)
 	ft_putstr("	fin du tableau\n");
 	ft_putchar('\n');
 
+	ft_putendl("*--- Test des fonctions de math");
+	t_3Dpoint	*p1;
+	int			m_identite[3][3];
+	int			m_translation[3][3];
+
+	m_identite[0][0] = 1;
+	m_identite[0][1] = 0;
+	m_identite[0][2] = 0;
+	m_identite[1][0] = 0;
+	m_identite[1][1] = 1;
+	m_identite[1][2] = 0;
+	m_identite[2][0] = 0;
+	m_identite[2][1] = 0;
+	m_identite[2][2] = 1;
+	
+	m_translation[0][0] = 1;
+	m_translation[0][1] = 1;
+	m_translation[0][2] = 1;
+	m_translation[1][0] = 1;
+	m_translation[1][1] = 1;
+	m_translation[1][2] = 1;
+	m_translation[2][0] = 1;
+	m_translation[2][1] = 1;
+	m_translation[2][2] = 1;
+	p1 = new_3Dpoint(1,2,3);
+
+	print_point(p1);
+	ft_putstr("Matrice identite : ");
+	point_to_matrix(p1, m_identite);
+	print_point(p1);
+	ft_putstr("Matrice test : ");
+	point_to_matrix(p1, m_translation);
+	print_point(p1);
+
+/*
 	ft_putendl("*--- Creation de la fenetre");
 	t_mlx	*mlx;
 	mlx = init_window();
@@ -56,28 +103,8 @@ void		print_tests(int ****r)
 	draw_line(mlx, a, b);
 
 	ft_putendl("*--- Transformation tableau int to matrix ");
-	t_map		*map;
-	t_3Dpoint	*from;
-	t_3Dpoint	*to;
-	t_cam		*cam;
 
-	from = new_3Dpoint(10, 10, 100);
-	to = new_3Dpoint(0, 0, -50);
-	cam = new_cam(from, to, 0.6); 
-	map = new_map(readed, cam);
 
-	t_3Dpoint *test;
-
-	test = vector_on_screen(new_3Dpoint(1,1,10), cam);
-	ft_putendl("test de vector on screen");
-	ft_putstr("Coordonnees : ( ");
-	ft_putnbr(test->x);
-	ft_putstr(" ; ");
-	ft_putnbr(test->y);
-	ft_putstr("; ");
-	ft_putnbr(test->z);
-	ft_putendl(" )");
-/*
 	ft_putendl("*--- Impression map ");
 	i = 0;
 	while (map->map[i])
@@ -96,11 +123,10 @@ void		print_tests(int ****r)
 	}
 */
 	ft_putendl("*--- Affichage map ");
-	draw_map(mlx, map);
-	t_pix *gaetrym = new_pix(250,350, 0xFFFF00);
-	put_pix(mlx, gaetrym);
+/*	
 	ft_putendl("!!! MISE EN BOUCLE INFINIE !!!");
 	mlx_loop(mlx->mlx_ptr);
+*/
 }
 //TEMP
 

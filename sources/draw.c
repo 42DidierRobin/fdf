@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 12:20:18 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/31 19:17:06 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/02 11:48:19 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b)
 	t_pix		*pix;
 
 	i = -1;
-	pix = new_pix(a->x, a->y, 0xFF0000);
+	pix = new_pix(MARGE_W + a->x, MARGE_L + a->y, 0xFF0000);
 	if (abs(a->x - b->x) <= abs(a->y - b->y))
 		step = 1 + abs(a->y - b->y);
 	else 
@@ -31,8 +31,8 @@ void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b)
 	while (++i < step)
 	{
 		put_pix(mlx, pix);
-		pix->x = a->x + round((double)i * xi);
-		pix->y = a->y + round((double)i * yi);
+		pix->x = MARGE_W + a->x + round((double)i * xi);
+		pix->y = MARGE_L + a->y + round((double)i * yi);
 		//rajouter la couleur
 	}
 	free(pix);
