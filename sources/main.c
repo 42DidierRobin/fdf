@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/02 16:18:22 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/02 18:27:52 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void		print_matrix(int size, double **m)
 		}
 		printf("\n");
 	}
+	ft_putstr("\n\n");
 }
 
 void		print_point(t_3Dpoint *point)
@@ -70,6 +71,7 @@ void		print_tests(int ****r)
 	ft_putstr("	fin du tableau\n");
 	ft_putchar('\n');
 
+/*
 	ft_putendl("*--- Test des fonctions de math");
 	t_3Dpoint	*p1;
 	t_3Dpoint	*p2;
@@ -95,12 +97,12 @@ void		print_tests(int ****r)
 	double **m3;
 	m3 = give_homothety_matrix(42);
 	print_matrix(4, m3);
+*/
 
-/*
 	ft_putendl("*--- Creation de la fenetre");
 	t_mlx	*mlx;
 	mlx = init_window();
-	
+/*	
 	ft_putendl("*--- Impression d'une ligne");
 	t_pix *a = (t_pix*)malloc(sizeof(t_pix));
 	t_pix *b = (t_pix*)malloc(sizeof(t_pix));
@@ -110,10 +112,16 @@ void		print_tests(int ****r)
 	b->x = 0;
 	b->y = 350;
 	draw_line(mlx, a, b);
-
+*/
 	ft_putendl("*--- Transformation tableau int to matrix ");
+	
+	t_cam *cam;
+	t_map *map;
 
+	cam = new_cam(1.57, 0.75, 50);
+	map = new_map(readed, cam);
 
+/*
 	ft_putendl("*--- Impression map ");
 	i = 0;
 	while (map->map[i])
@@ -132,10 +140,10 @@ void		print_tests(int ****r)
 	}
 */
 	ft_putendl("*--- Affichage map ");
-/*	
+	
 	ft_putendl("!!! MISE EN BOUCLE INFINIE !!!");
 	mlx_loop(mlx->mlx_ptr);
-*/
+
 }
 //TEMP
 

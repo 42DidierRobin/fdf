@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:17:07 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/02 15:25:19 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/02 18:28:02 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ typedef struct		s_3Dpoint
 
 typedef struct		s_cam
 {
-
+	double		eye_theta;
+	double		eye_phi;
+	double		eye_r;
+	t_3Dpoint	*eye_coord;
 }					t_cam;
 
 typedef struct		s_pix
@@ -68,18 +71,25 @@ typedef struct		s_map
 	struct s_pix	***map;
 }					t_map;
 
+//Camera
+t_cam			*new_cam(double theta, double phi, double r);
+void			vision_zoom(t_cam *c, int zoom);
+void			vision_rot1(t_cam *c, double angle);
+void			vision_rot2(t_cam *c, double angle);
+
 //Matrix.c
 double			**give_null_matrix(int size);
 double			**give_homothety_matrix(int factor);
 double			**give_translation_matrix(t_3Dpoint *vector);
-double			**add_matrix(int **m, int **n, int size);
-double			**mult_matrix(int **m, int **n, int size);
+double			**add_matrix(double **m, double **n, int size);
+double			**mult_matrix(double **m, double **n, int size);
 
 //Matrix_2.c
 double			**give_rotation_matrix(t_3Dpoint *vector, double a);
-void			matrix_on_point(t_3Dpoint *point, int m[4][4]);
+void			matrix_on_point(t_3Dpoint *point, double **m);
 
 //Math_plan.c
+void			point_homo_to_cart(t_3Dpoint *point);
 t_3Dpoint		*new_3Dpoint(double x, double y, double z);
 
 // Map.c
@@ -98,5 +108,8 @@ void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b);
 // Pixels.c
 t_pix			*new_pix(int x, int y, int clr);
 void			put_pix(t_mlx *mlx, t_pix *pix);
+
+//temp
+void		print_matrix(int size, double **m);
 
 #endif

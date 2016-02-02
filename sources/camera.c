@@ -6,18 +6,18 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 16:30:10 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/02 16:40:43 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/02 18:01:49 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/file_de_fer.h"
 
 
-t_vision			*new_vision(double theta, double phi,  double r)
+t_cam				*new_cam(double theta, double phi,  double r)
 {
 	t_cam		*ret;
 
-	ret = (t_vision*)malloc(sizeof(t_vision));
+	ret = (t_cam*)malloc(sizeof(t_cam));
 	ret->eye_theta = theta;
 	ret->eye_phi = phi;
 	ret->eye_r = r;
@@ -26,7 +26,7 @@ t_vision			*new_vision(double theta, double phi,  double r)
 	return (ret);
 }
 
-void				vision_zoom(t_vision *c, int zoom)
+void				vision_zoom(t_cam *c, int zoom)
 {
 	c->eye_r = c->eye_r + zoom;
 
@@ -35,7 +35,7 @@ void				vision_zoom(t_vision *c, int zoom)
 	c->eye_coord->z = c->eye_r * sin(c->eye_phi); 
 }
 
-void				vision_rot1(t_vision *c, double angle)
+void				vision_rot1(t_cam *c, double angle)
 {
 	c->eye_theta = c->eye_theta + angle;
 
@@ -44,7 +44,7 @@ void				vision_rot1(t_vision *c, double angle)
 	c->eye_coord->z = c->eye_r * sin(c->eye_phi); 
 }
 
-void				vision_rot2(t_vision *c, double angle)
+void				vision_rot2(t_cam *c, double angle)
 {
 	c->eye_phi = c->eye_phi + angle;
 
