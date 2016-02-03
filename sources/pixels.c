@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 10:53:21 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/02 17:52:26 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/03 12:07:14 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ t_pix				*new_pix(int x, int y, int clr)
 
 void				put_pix(t_mlx *mlx, t_pix *pix)
 {
-	mlx_pixel_put(mlx->mlx_ptr, mlx->mlx_win, /*MARGE_L +*/  pix->x,
-			/*MARGE_W +*/ pix->y, 0xFF0000);
+	mlx_pixel_put(mlx->mlx_ptr, mlx->mlx_win, WINDOW_W / 2 + pix->y,
+			WINDOW_L / 2 + pix->x, 0xFF0000);
 }

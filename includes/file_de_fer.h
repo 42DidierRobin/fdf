@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:17:07 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/02 18:28:02 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/03 13:24:56 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@
 #define SEPARATOR ' '
 #define WINDOW_L 600
 #define WINDOW_W 1200
-#define MARGE_L 150
-#define MARGE_W 150
-#define	PAS		5
+#define	PAS		20
 
 // Coordonnees dite homogene. 
 typedef struct		s_3Dpoint
@@ -40,15 +38,14 @@ typedef struct		s_3Dpoint
 	double		x;
 	double		y;
 	double		z;
-	double		t;
 }					t_3Dpoint;
 
 typedef struct		s_cam
 {
-	double		eye_theta;
-	double		eye_phi;
-	double		eye_r;
-	t_3Dpoint	*eye_coord;
+	double		theta;
+	double		phi;
+	double		r;
+	t_3Dpoint	*carth;
 }					t_cam;
 
 typedef struct		s_pix
@@ -111,5 +108,5 @@ void			put_pix(t_mlx *mlx, t_pix *pix);
 
 //temp
 void		print_matrix(int size, double **m);
-
+void		print_point(t_3Dpoint *point);
 #endif

@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 12:27:04 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/02 18:03:53 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/03 13:19:05 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ double			**give_translation_matrix(t_3Dpoint *vector)
 	ret[1][1] = 1;
 	ret[2][2] = 1;
 	ret[3][3] = 1;
-	ret[3][0] = vector->x;
-	ret[3][1] = vector->y;
-	ret[3][2] = vector->z;
+	ret[0][3] = vector->x;
+	ret[1][3] = vector->y;
+	ret[2][3] = vector->z;
 	return (ret);
 }
 	

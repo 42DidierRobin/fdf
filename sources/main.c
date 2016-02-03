@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/02 18:27:52 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/03 13:08:44 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,10 @@ void		print_tests(int ****r)
 	t_cam *cam;
 	t_map *map;
 
-	cam = new_cam(1.57, 0.75, 50);
+	cam = new_cam(2, 2, 60);
 	map = new_map(readed, cam);
 
-/*
+
 	ft_putendl("*--- Impression map ");
 	i = 0;
 	while (map->map[i])
@@ -138,9 +138,10 @@ void		print_tests(int ****r)
 		}
 		i++;
 	}
-*/
+
 	ft_putendl("*--- Affichage map ");
-	
+	draw_map(mlx, map);
+
 	ft_putendl("!!! MISE EN BOUCLE INFINIE !!!");
 	mlx_loop(mlx->mlx_ptr);
 

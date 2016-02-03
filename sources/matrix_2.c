@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 14:41:08 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/02 18:20:37 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/02/03 13:20:39 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ double			**give_rotation_matrix(t_3Dpoint *u, double a)
 
 void		matrix_on_point(t_3Dpoint *point, double **m)
 {
-	point->x = m[0][0] * point->x + m[0][1] * point->y + m[0][2] * point->z + m[0][3] * point->z;
-	point->y = m[1][0] * point->x + m[1][1] * point->y + m[1][2] * point->z + m[1][3] * point->z;
-	point->z = m[2][0] * point->x + m[2][1] * point->y + m[2][2] * point->z + m[2][3] * point->z;
-	point->t = m[3][0] * point->x + m[3][1] * point->y + m[3][2] * point->z + m[3][3] * point->z;
+	point->x = m[0][0] * point->x + m[0][1] * point->y + m[0][2] * point->z + m[0][3];
+	point->y = m[1][0] * point->x + m[1][1] * point->y + m[1][2] * point->z + m[1][3];
+	point->z = m[2][0] * point->x + m[2][1] * point->y + m[2][2] * point->z + m[2][3];
 }
