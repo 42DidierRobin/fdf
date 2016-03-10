@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 10:02:35 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/03 16:13:31 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/10 16:08:08 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ static t_pix		*point_to_pix(double **matrix, t_3Dpoint *point, int d)
 	t_pix		*pix;
 
 	matrix_on_point(point, matrix);
+	// TEMP
+	ft_putstr("Point apres passage de la matrice : \n");
 	print_point(point);
-	pix = new_pix(d * point->x / point->z, d * point->y / point->z, point->z);
+	// TEMP
+	pix = new_pix(d*point->x, d*point->y, point->z);
 	return (pix);
 }
 
@@ -53,15 +56,12 @@ static int			*pre_map(int ***readed, t_map **map)
 static double		**give_final_matrix(t_cam *cam)
 {
 	double			**final;
-	double			**projection_m;
 
-	projection_m = give_null_matrix(4);
-	final = add_matrix(mult_matrix(give_rotation_matrix_z(cam->theta),
-				give_rotation_matrix_x(cam->phi), 4),
-			give_translation_matrix(cam->carth),4);
-	print_matrix(4, final);
-	
-
+	cam->pos->x = cam->pos->x + 1 - 1;
+	final = give_null_matrix(4);
+	final[0][0] = 1;
+	final[1][1] = 1;
+	final[2][2] = 1;
 	return (final);
 }
 
@@ -71,7 +71,7 @@ t_map				*new_map(int ***readed, t_cam *cam)
 	int			j;
 	int			*mid;
 	t_map		*map;
-	t_3Dpoint		*point;
+	t_3Dpoint	*point;
 	double		**final_matrix;
 
 	final_matrix = give_final_matrix(cam);
@@ -85,8 +85,11 @@ t_map				*new_map(int ***readed, t_cam *cam)
 		while (readed[i][++j])
 		{
 			point = new_3Dpoint((i - mid[0]) * PAS, (j - mid[1]) * PAS, *readed[i][j] * PAS);
+			//TEMP
+			ft_putstr("\n\nPoint avant creation map :\n");
 			print_point(point);
-			map->map[i][j] = point_to_pix(final_matrix, point, cam->far - cam->r);
+			//TEMP
+			map->map[i][j] = point_to_pix(final_matrix, point, 1);
 		}
 	}
 	return (map);

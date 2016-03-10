@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/03 16:13:36 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/10 16:12:11 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,9 @@ void		print_tests(int ****r)
 	t_cam *cam;
 	t_map *map;
 
-	cam = new_cam( 0.6, 100, 200);
+	cam = new_cam(new_3Dpoint(0,0,100), new_3Dpoint(0.8,0.8,0.8));
 	map = new_map(readed, cam);
 
-/*
 	ft_putendl("*--- Impression map ");
 	i = 0;
 	while (map->map[i])
@@ -138,7 +137,7 @@ void		print_tests(int ****r)
 		}
 		i++;
 	}
-*/
+
 	ft_putendl("*--- Affichage map ");
 	draw_map(mlx, map);
 
