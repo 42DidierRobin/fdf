@@ -6,20 +6,21 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 16:30:10 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/10 15:47:21 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/10 18:12:35 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/file_de_fer.h"
 
 
-t_cam				*new_cam(t_3Dpoint *pos, t_3Dpoint *rot)
+t_cam				*new_cam(t_3Dpoint *pos, t_3Dpoint *rot, double fov)
 {
 	t_cam		*ret;
 
 	ret = (t_cam*)malloc(sizeof(t_cam));
 	ret->pos = pos;
 	ret->rot = rot;
+	ret->fov = fov;
 	return (ret);
 }
 

@@ -6,13 +6,25 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/10 16:12:11 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/10 18:31:04 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/file_de_fer.h"
 
 //TEMP
+
+void		print_pix(t_pix *pix)
+{
+	ft_putstr("Pixel coord :\n");
+	ft_putstr("x : ");
+	ft_putnbr(pix->x);
+	ft_putchar('\n');
+	ft_putstr("y : ");
+	ft_putnbr(pix->y);
+	ft_putchar('\n');
+	ft_putchar('\n');
+}
 
 void		print_matrix(int size, double **m)
 {
@@ -71,34 +83,6 @@ void		print_tests(int ****r)
 	ft_putstr("	fin du tableau\n");
 	ft_putchar('\n');
 
-/*
-	ft_putendl("*--- Test des fonctions de math");
-	t_3Dpoint	*p1;
-	t_3Dpoint	*p2;
-
-	p1 = new_3Dpoint(- 0.33, 0.66, 0.66);
-	double	 **m1;
-	m1 = give_rotation_matrix(p1, 1.29);
-	ft_putendl("Matrice Rotation avec ∂ = 1.29 (74) et");
-	ft_putstr("Vecteur unitaire de reference = ");
-	print_point(p1);
-	print_matrix(4, m1);
-	
-	ft_putchar('\n');
-	p2 = new_3Dpoint(1, 0, 0);
-	double	 **m2;
-	m2 = give_rotation_matrix(p2, -0.52);
-	ft_putendl("Matrice Rotation avec ∂ = -0.52 (-30) et");
-	ft_putstr("Vecteur unitaire de reference = ");
-	print_point(p2);
-	print_matrix(4, m2);
-
-	ft_putchar('\n');
-	double **m3;
-	m3 = give_homothety_matrix(42);
-	print_matrix(4, m3);
-*/
-
 	ft_putendl("*--- Creation de la fenetre");
 	t_mlx	*mlx;
 	mlx = init_window();
@@ -118,9 +102,9 @@ void		print_tests(int ****r)
 	t_cam *cam;
 	t_map *map;
 
-	cam = new_cam(new_3Dpoint(0,0,100), new_3Dpoint(0.8,0.8,0.8));
+	cam = new_cam(new_3Dpoint(0,0,-1000), new_3Dpoint(0.3,0.3,0.1), 1000);
 	map = new_map(readed, cam);
-
+/*
 	ft_putendl("*--- Impression map ");
 	i = 0;
 	while (map->map[i])
@@ -137,7 +121,7 @@ void		print_tests(int ****r)
 		}
 		i++;
 	}
-
+*/
 	ft_putendl("*--- Affichage map ");
 	draw_map(mlx, map);
 

@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:17:07 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/03 13:24:56 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/10 18:31:02 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 #define SEPARATOR ' '
 #define WINDOW_L 600
 #define WINDOW_W 1200
-#define	PAS		20
+#define	PAS		10
 
 // Coordonnees dite homogene. 
 typedef struct		s_3Dpoint
@@ -42,10 +42,9 @@ typedef struct		s_3Dpoint
 
 typedef struct		s_cam
 {
-	double		theta;
-	double		phi;
-	double		r;
-	t_3Dpoint	*carth;
+	double		fov;
+	t_3Dpoint	*pos;
+	t_3Dpoint	*rot;
 }					t_cam;
 
 typedef struct		s_pix
@@ -69,10 +68,7 @@ typedef struct		s_map
 }					t_map;
 
 //Camera
-t_cam			*new_cam(double theta, double phi, double r);
-void			vision_zoom(t_cam *c, int zoom);
-void			vision_rot1(t_cam *c, double angle);
-void			vision_rot2(t_cam *c, double angle);
+t_cam			*new_cam(t_3Dpoint *pos, t_3Dpoint *rot, double fov);
 
 //Matrix.c
 double			**give_null_matrix(int size);
@@ -82,7 +78,9 @@ double			**add_matrix(double **m, double **n, int size);
 double			**mult_matrix(double **m, double **n, int size);
 
 //Matrix_2.c
-double			**give_rotation_matrix(t_3Dpoint *vector, double a);
+double			**give_rotation_matrix_z(double a);
+double			**give_rotation_matrix_y(double a);
+double			**give_rotation_matrix_x(double a);
 void			matrix_on_point(t_3Dpoint *point, double **m);
 
 //Math_plan.c
@@ -107,6 +105,7 @@ t_pix			*new_pix(int x, int y, int clr);
 void			put_pix(t_mlx *mlx, t_pix *pix);
 
 //temp
+void		print_pix(t_pix *pix);
 void		print_matrix(int size, double **m);
 void		print_point(t_3Dpoint *point);
 #endif

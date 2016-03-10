@@ -6,22 +6,27 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 10:02:35 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/10 16:08:08 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/10 18:31:06 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/file_de_fer.h"
 
-static t_pix		*point_to_pix(double **matrix, t_3Dpoint *point, int d)
+static t_pix		*point_to_pix(double **matrix, t_3Dpoint *point, int fov)
 {
 	t_pix		*pix;
 
+	ft_putnbr(fov);
 	matrix_on_point(point, matrix);
+	pix = new_pix(fov / point->z * point->x, 
+			fov / point->z * point->y, point->z);
 	// TEMP
+	fov++;
 	ft_putstr("Point apres passage de la matrice : \n");
 	print_point(point);
+	//print_pix(pix);
 	// TEMP
-	pix = new_pix(d*point->x, d*point->y, point->z);
+	
 	return (pix);
 }
 
@@ -55,14 +60,20 @@ static int			*pre_map(int ***readed, t_map **map)
 
 static double		**give_final_matrix(t_cam *cam)
 {
-	double			**final;
+	double			**to_cam_matrix;
+	t_3Dpoint		*p;
 
-	cam->pos->x = cam->pos->x + 1 - 1;
-	final = give_null_matrix(4);
-	final[0][0] = 1;
-	final[1][1] = 1;
-	final[2][2] = 1;
-	return (final);
+	p = new_3Dpoint(-cam->pos->x, -cam->pos->y, -cam->pos->z);
+	to_cam_matrix = mult_matrix(mult_matrix(give_rotation_matrix_z(-cam->rot->z), 
+				give_rotation_matrix_y(-cam->rot->y), 4),
+			give_rotation_matrix_x(-cam->rot->x), 4);
+	to_cam_matrix = add_matrix(to_cam_matrix,give_translation_matrix(p),4);
+	to_cam_matrix[3][3] = 1;
+	//TEMP
+	ft_putstr("Matrice de camera : \n");
+	print_matrix(4, to_cam_matrix);
+	//TEMP
+	return (to_cam_matrix);
 }
 
 t_map				*new_map(int ***readed, t_cam *cam)
@@ -75,7 +86,6 @@ t_map				*new_map(int ***readed, t_cam *cam)
 	double		**final_matrix;
 
 	final_matrix = give_final_matrix(cam);
-	cam++;
 	map = (t_map*)malloc(sizeof(t_map));
 	mid = pre_map(readed, &map);
 	i = -1;
@@ -88,8 +98,9 @@ t_map				*new_map(int ***readed, t_cam *cam)
 			//TEMP
 			ft_putstr("\n\nPoint avant creation map :\n");
 			print_point(point);
+			ft_putnbr(cam->fov);
 			//TEMP
-			map->map[i][j] = point_to_pix(final_matrix, point, 1);
+			map->map[i][j] = point_to_pix(final_matrix, point, cam->fov);
 		}
 	}
 	return (map);

@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 12:27:04 by rdidier           #+#    #+#             */
-/*   Updated: 2016/02/03 13:19:05 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/10 17:09:01 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,24 @@ double			**give_homothety_matrix(int factor)
 double			**mult_matrix(double **m, double **n, int size)
 {
 	double				**ret;
+	double				temp;
 	int					i;
 	int					j;
+	int					k;
 
 	ret = give_null_matrix(size);
 	i = -1;
 	while (++i < size)
 	{
 		j = -1;
-		while(++j < size)
-			ret[i][j] = m[i][j] * n[i][j];
+		while (++j < size)
+		{
+			temp = 0;
+			k = -1;
+			while ( ++k < size)
+				temp = temp + m[i][k] * n[k][j];
+			ret[i][j] = temp;
+		}
 	}
 	return (ret);
 }
