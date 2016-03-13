@@ -47,12 +47,19 @@ typedef struct		s_cam
 	t_3Dpoint	*rot;
 }					t_cam;
 
+typedef struct      s_color
+{
+    int     r;
+    int     g;
+    int     b;
+    int     color;
+}
+
 typedef struct		s_pix
 {
 	int		x;
 	int		y;
-//	int		z;
-//	t_color	color;
+	t_color	color;
 }					t_pix;
 
 typedef struct		s_mlx
@@ -63,7 +70,7 @@ typedef struct		s_mlx
 
 typedef struct		s_map
 {
-	t_pix			*center;
+	int 			***readed;
 	struct s_pix	***map;
 }					t_map;
 
@@ -88,6 +95,7 @@ void			point_homo_to_cart(t_3Dpoint *point);
 t_3Dpoint		*new_3Dpoint(double x, double y, double z);
 
 // Map.c
+void            update_map(t_map *map, t_cam *cam);
 t_map			*new_map(int ***readed, t_cam *cam);
 
 // Read.c
@@ -101,6 +109,7 @@ void			draw_map(t_mlx *mlx, t_map *map);
 void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b);
 
 // Pixels.c
+void            del_pix(t_pix **pix);
 t_pix			*new_pix(int x, int y, int clr);
 void			put_pix(t_mlx *mlx, t_pix *pix);
 

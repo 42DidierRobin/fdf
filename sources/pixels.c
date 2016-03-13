@@ -12,6 +12,21 @@
 
 #include "../includes/file_de_fer.h"
 
+void                del_pix(t_pix **pix)
+{
+    //Delete de la struct couleur a faire
+    free(*pix);
+}
+
+t_color             *new_color(int z, t_map *map)
+{
+    t_color *clr;
+
+    clr = (t_color*)malloc(sizeof(t_color));
+    
+
+}
+
 t_pix				*new_pix(int x, int y, int clr)
 {
 	t_pix		*ret;

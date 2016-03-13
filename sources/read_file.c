@@ -12,28 +12,37 @@
 
 #include "../includes/file_de_fer.h"
 
-static void			readed_to_map(int ***tab, char **readed)
+static void			readed_to_map(int ***tab, char **readed, int size)
 {
-	int			i;
 	int			j;
+    int         i;
 	int			length;
 	char		**split_ret;
 
-	i = -1;
-	while (readed[++i])
+    i = 0;
+    size--;
+	while (size - i + 1)
 	{
 		length = 0;
 		split_ret = ft_strsplit((char const*)readed[i], SEPARATOR);
-		while (split_ret[++length]);
-		tab[i] = (int**)malloc(sizeof(int*) * length);	
-		tab[i][length] = NULL;
+		while (split_ret[++length])
+            ;
+        
+        //TEMP
+        ft_putnbr(length);
+        ft_putchar('\n');
+		//TEMP
+
+        tab[size - i] = (int**)malloc(sizeof(int*) * length + 1);	
+		tab[size - i][length] = NULL;
 		j = -1;
 		while (++j < length)
 		{
-			(tab[i][j]) = (int*)malloc(sizeof(int));
-			*(tab[i][j]) = ft_atoi(split_ret[j]);
+			(tab[size - i][length - j - 1]) = (int*)malloc(sizeof(int));
+			*(tab[size - i][length - j - 1]) = ft_atoi(split_ret[j]);
 			ft_strdel(&split_ret[j]);
 		}
+        i++;
 	}
 	free(split_ret);
 }
@@ -56,9 +65,9 @@ int				***read_it(char *file_name)
 			return (NULL);
 	}
 	tab[i] = NULL;
-	ret = (int***)malloc(sizeof(int**) * i);
+	ret = (int***)malloc(sizeof(int**) * i + 1);
 	ret[i] = NULL;
-	readed_to_map(ret, tab);
+	readed_to_map(ret, tab, i);
 	i = -1;
 	while (tab[++i])
 		ft_strdel(&(tab[i]));

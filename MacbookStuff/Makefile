@@ -28,7 +28,7 @@ OBJ		=	$(patsubst src/%.c,./%.o,$(SRC))
 
 FLAG	=	-Wall -Werror -Wextra -framework OpenGL -framework AppKit
 
-MAP		=	../maps/elem.fdf
+MAP		=	../maps/42.fdf
 
 .SILENT:
 

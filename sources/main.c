@@ -65,15 +65,15 @@ void		print_tests(int ****r)
 	ft_putendl("*-----* Demarrage des tests *-----*");
 	ft_putendl("*--- Lecture du tableau de int ");
 	i = 0;
-	while (readed[i] != NULL)
+	while (readed[i])
 	{
 		j = 0;
-		while (readed[i][j] != NULL)
+		while (readed[i][j])
 		{
-			ft_putnbr(*(readed[i][j]));
-			if (readed[i][j + 1] != NULL && *(readed[i][j+1]) != 0)
+            ft_putnbr(*(readed[i][j]));
+			if (readed[i][j + 1] && *(readed[i][j+1]) >= 9)
 				ft_putstr(".");
-			else if (readed[i][j + 1] != NULL && *(readed[i][j+1]) == 0)
+			else if (readed[i][j + 1])
 				ft_putstr("..");
 			j++;
 		}
@@ -102,9 +102,10 @@ void		print_tests(int ****r)
 	t_cam *cam;
 	t_map *map;
 
-	cam = new_cam(new_3Dpoint(0,0,-1000), new_3Dpoint(0.3,0.3,0.1), 1000);
+	cam = new_cam(new_3Dpoint(0,0,500), new_3Dpoint(0.8,0.8,0.3), 100);
 	map = new_map(readed, cam);
-/*
+
+    ft_putchar('\n');
 	ft_putendl("*--- Impression map ");
 	i = 0;
 	while (map->map[i])
@@ -116,13 +117,23 @@ void		print_tests(int ****r)
 			ft_putnbr(map->map[i][j]->x);
 			ft_putstr(";");
 			ft_putnbr(map->map[i][j]->y);
-			ft_putendl(")");
-			j++;
+            if (map->map[i][j+1])
+			    ft_putstr(") - ");
+		    else
+                ft_putendl(") ||||");
+		
+            j++;
 		}
 		i++;
 	}
-*/
+
 	ft_putendl("*--- Affichage map ");
+	draw_map(mlx, map);
+
+
+	ft_putendl("*--- test de MAJ de map ");
+    cam->fov = 1000;
+    update_map(map, cam);
 	draw_map(mlx, map);
 
 	ft_putendl("!!! MISE EN BOUCLE INFINIE !!!");
