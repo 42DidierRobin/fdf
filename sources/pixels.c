@@ -6,44 +6,60 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 10:53:21 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/14 10:18:01 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/14 18:51:12 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/file_de_fer.h"
 
-void                del_pix(t_pix **pix)
+t_color				*give_color(int z, t_map *map)
 {
-    //Delete de la struct couleur a faire
-    free(*pix);
+	double		coef;
+	double		r;
+	double		g;
+	double		b;
+
+	if (z == 0)
+		z = 1;
+	else if (z != -1)
+		z++;
+	coef = z / (map->zmax - map->zmin);
+	ft_putstr("Coefficient toruve :");
+	ft_putnbr(coef);
+	ft_putchar('\n');
+	r = (map->clr_to->r - map->clr_from->r) * coef;
+	g = (map->clr_to->g - map->clr_from->g) * coef;
+	b = (map->clr_to->b - map->clr_from->b) * coef;
+	return (new_color((char)r, (char)g, (char)b));
 }
 
-t_color             *new_color(int z, t_map *map)
+t_color             *new_color(char r, char g, char b)
 {
     t_color *clr;
 
-	z++;
-	if (map)
-   		ft_putstr("youpi");	
 	clr = (t_color*)malloc(sizeof(t_color));
-	
+	clr->r =r;
+	clr->g =g;
+	clr->b =b;
 	return (clr);
 }
 
-t_pix				*new_pix(int x, int y, int clr)
+t_pix				*new_pix(int x, int y, int oldz)
 {
 	t_pix		*ret;
 
 	ret = (t_pix*)malloc(sizeof(t_pix));
 	ret->x = x;
 	ret->y = y;
-	/* ANTI WARNING */clr++;
-	//ret->rgb = clr;
+	ret->oldz = oldz;
 	return (ret);
 }
 
-void				put_pix(t_mlx *mlx, t_pix *pix)
+void				put_pix(t_mlx *mlx, t_pix *pix, t_color *clr)
 {
+	unsigned int	color;
+
+	color = clr->r * 65536 + clr->g * 256 + clr->b;
 	mlx_pixel_put(mlx->mlx_ptr, mlx->mlx_win, WINDOW_W / 2 + pix->y,
-			WINDOW_L / 2 + pix->x, 0xFF0000);
+			WINDOW_L / 2 + pix->x, color);
 }

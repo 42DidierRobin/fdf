@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:17:07 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/14 13:28:14 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/14 18:51:23 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 #define SEPARATOR 		' '
 #define WINDOW_L 		600
 #define WINDOW_W	 	1200
-#define	PAS				10
+#define	PAS				5
 #define CAM_STEP		10
 
 // Coordonnees dite homogene. 
@@ -43,6 +43,7 @@ typedef struct		s_3Dpoint
 
 typedef struct		s_cam
 {
+	double		amp;
 	double		fov;
 	t_3Dpoint	*pos;
 	t_3Dpoint	*rot;
@@ -53,14 +54,13 @@ typedef struct      s_color
     char     r;
     char     g;
     char     b;
-    int     color;
 }					t_color;
 
 typedef struct		s_pix
 {
 	int		x;
 	int		y;
-	t_color	color;
+	int		oldz;
 }					t_pix;
 
 typedef struct		s_mlx
@@ -71,6 +71,10 @@ typedef struct		s_mlx
 
 typedef struct		s_map
 {
+	t_color			*clr_from;
+	t_color			*clr_to;
+	int				zmin;
+	int				zmax;
 	int 			***readed;
 	struct s_pix	***map;
 }					t_map;
@@ -116,12 +120,13 @@ int				window_event(int keycode, void *d);
 
 // Draw.c
 void			draw_map(t_mlx *mlx, t_map *map);
-void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b);
+void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b, t_map *map);
 
 // Pixels.c
-void            del_pix(t_pix **pix);
-t_pix			*new_pix(int x, int y, int clr);
-void			put_pix(t_mlx *mlx, t_pix *pix);
+t_pix			*new_pix(int x, int y, int oldz);
+t_color			*new_color(char r, char g, char b);
+t_color			*give_color(int z, t_map *map);
+void			put_pix(t_mlx *mlx, t_pix *pix, t_color *clr);
 
 //temp
 void		print_pix(t_pix *pix);

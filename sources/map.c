@@ -6,25 +6,26 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 10:02:35 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/14 13:28:11 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/14 18:31:04 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/file_de_fer.h"
 
-static t_pix		*point_to_pix(double **matrix, t_3Dpoint *point, int fov)
+static t_pix		*point_to_pix(double **matrix, t_3Dpoint *point, t_cam *cam, t_map *map)
 {
 	t_pix		*pix;
+	int			oldz;
 
+	oldz = point->z;
+	if (point->z < map->zmin)
+		map->zmin = point->z;
+	if (point->z > map->zmax)
+		map->zmax = point->z;
+	point->z = point->z * PAS * cam->amp;
 	matrix_on_point(point, matrix);
-	pix = new_pix(fov / (point->z ) * point->x, 
-			fov / (point->z) * point->y, point->z);
-	// TEMP
-	//ft_putstr("Point apres passage de la matrice : \n");
-	//print_point(point);
-	//print_pix(pix);
-	// TEMP
-	
+	pix = new_pix((cam->fov / point->z) * point->x, 
+			(cam->fov / point->z) * point->y, oldz);
 	return (pix);
 }
 
@@ -66,10 +67,6 @@ static double		**give_final_matrix(t_cam *cam)
 			give_rotation_matrix_x(-cam->rot->x), 4);
 	to_cam_matrix = add_matrix(to_cam_matrix,give_translation_matrix(p),4);
 	to_cam_matrix[3][3] = 1;
-	//TEMP
-	//ft_putstr("Matrice de camera : \n");
-	//print_matrix(4, to_cam_matrix);
-	//TEMP
 	return (to_cam_matrix);
 }
 
@@ -85,7 +82,7 @@ t_map                *update_map(t_map *map, t_cam *cam)
         j = 0;
         while (map->map[i][j])
         {
-            del_pix(&(map->map[i][j]));
+            free(map->map[i][j]);
             j++;
         }
         free(map->map[i]);
@@ -93,6 +90,8 @@ t_map                *update_map(t_map *map, t_cam *cam)
     }
     free(map->map);
     newm = new_map(map->readed, cam);
+	newm->clr_from = map->clr_from;
+	newm->clr_to = map->clr_to;
 	map->readed = NULL;
 	free(map);
 	return (newm);
@@ -110,6 +109,8 @@ t_map				*new_map(int ***readed, t_cam *cam)
 	final_matrix = give_final_matrix(cam);
 	map = (t_map*)malloc(sizeof(t_map));
     map->readed = readed;
+	map->zmin = 0;
+	map->zmax = 0;
 	mid = pre_map(&map);
 	i = -1;
 	while (readed[++i])
@@ -117,13 +118,8 @@ t_map				*new_map(int ***readed, t_cam *cam)
 		j = -1;
 		while (readed[i][++j])
 		{
-			point = new_3Dpoint((i - mid[0]) * PAS, (j - mid[1]) * PAS, *readed[i][j] * PAS);
-			//TEMP
-			//ft_putstr("\n\nPoint avant creation map :\n");
-			//print_point(point);
-			//ft_putnbr(cam->fov);
-			//TEMP
-			map->map[i][j] = point_to_pix(final_matrix, point, cam->fov);
+			point = new_3Dpoint((i - mid[0]) * PAS, (j - mid[1]) * PAS, *readed[i][j]);
+			map->map[i][j] = point_to_pix(final_matrix, point, cam, map);
 		}
 	}
 	return (map);

@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/14 13:22:30 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/14 18:51:26 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,11 +131,13 @@ void		print_tests(int ****r)
 	t_cam *cam;
 	t_map *map;
 
-	cam = new_cam(new_3Dpoint(20,-20,1200), new_3Dpoint(0,-1.3,0), 1000);
+	cam = new_cam(new_3Dpoint(20,-20,1000), new_3Dpoint(0,-1.3,0), 1000);
 	map = new_map(readed, cam);
+	map->clr_from = new_color(0,0,0);
+	map->clr_to = new_color(255,255,255);
 /*
     ft_putchar('\n');
-*/
+
 
 	pprint_map(map);
 
@@ -154,7 +156,7 @@ void		print_tests(int ****r)
 	mlx_clear_window(mlx->mlx_ptr, mlx->mlx_win);
 	pprint_map(map);
 	draw_map(mlx, map);
-	
+*/	
 	ft_putendl("*--- Key events ---*");
 	t_fdf_data	*data;
 

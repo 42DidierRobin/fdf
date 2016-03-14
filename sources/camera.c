@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 16:30:10 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/14 12:43:38 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/14 18:22:04 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_cam				*new_cam(t_3Dpoint *pos, t_3Dpoint *rot, double fov)
 	t_cam		*ret;
 
 	ret = (t_cam*)malloc(sizeof(t_cam));
+	ret->amp = 1;
 	ret->pos = pos;
 	ret->rot = rot;
 	ret->fov = fov;
@@ -67,9 +68,20 @@ void				move_cam(t_cam *cam, int key)
 		cam->rot->z = cam->rot->z + (double)CAM_STEP / 100;
 	else if (key == 5)
 		cam->rot->z = cam->rot->z - (double)CAM_STEP / 100;
+	else if (key == 32)
+	{
+		cam->amp = cam->amp + (double)CAM_STEP / 100;
+		if (cam->amp == 0)
+			cam->amp = (double)CAM_STEP / 100;
+	}
+	else if (key == 38)
+	{
+		cam->amp = cam->amp - (double)CAM_STEP / 100;
+		if (!cam->amp == 0)
+			cam->amp = -(double)CAM_STEP / 100;
+	}
 	else if (key == 24)
 		cam->fov = cam->fov + CAM_STEP * 10;
 	else if (key == 27)
 		cam->fov = cam->fov - CAM_STEP * 10;
-	print_cam(cam);
 }
