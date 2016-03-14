@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/10 18:31:04 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/14 13:22:30 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,35 @@ void		print_pix(t_pix *pix)
 	ft_putnbr(pix->y);
 	ft_putchar('\n');
 	ft_putchar('\n');
+}
+
+void		pprint_map(t_map *map)
+{
+	int	i;
+	int j;
+
+	ft_putendl("*--- Impression map ");
+	i = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			ft_putnbr(j);
+			ft_putstr("(");
+			ft_putnbr(map->map[i][j]->x);
+			ft_putstr(";");
+			ft_putnbr(map->map[i][j]->y);
+            if (map->map[i][j+1])
+			    ft_putstr(") - ");
+		    else
+                ft_putendl(") ||||");
+		
+            j++;
+		}
+		ft_putendl("fin de ligne");
+		i++;
+	}
 }
 
 void		print_matrix(int size, double **m)
@@ -102,41 +131,41 @@ void		print_tests(int ****r)
 	t_cam *cam;
 	t_map *map;
 
-	cam = new_cam(new_3Dpoint(0,0,500), new_3Dpoint(0.8,0.8,0.3), 100);
+	cam = new_cam(new_3Dpoint(20,-20,1200), new_3Dpoint(0,-1.3,0), 1000);
 	map = new_map(readed, cam);
-
+/*
     ft_putchar('\n');
-	ft_putendl("*--- Impression map ");
-	i = 0;
-	while (map->map[i])
-	{
-		j = 0;
-		while (map->map[i][j])
-		{
-			ft_putstr("(");
-			ft_putnbr(map->map[i][j]->x);
-			ft_putstr(";");
-			ft_putnbr(map->map[i][j]->y);
-            if (map->map[i][j+1])
-			    ft_putstr(") - ");
-		    else
-                ft_putendl(") ||||");
-		
-            j++;
-		}
-		i++;
-	}
+*/
 
-	ft_putendl("*--- Affichage map ");
-	draw_map(mlx, map);
+	pprint_map(map);
 
 
 	ft_putendl("*--- test de MAJ de map ");
-    cam->fov = 1000;
-    update_map(map, cam);
+    cam->fov = 1300;
+    map = update_map(map, cam);
+	mlx_clear_window(mlx->mlx_ptr, mlx->mlx_win);
+	pprint_map(map);
 	draw_map(mlx, map);
 
+	ft_putendl("*--- test de MAJ de map ");
+    cam->fov = 500;
+    map = update_map(map, cam);
+	ft_putstr("endofupdate");
+	mlx_clear_window(mlx->mlx_ptr, mlx->mlx_win);
+	pprint_map(map);
+	draw_map(mlx, map);
+	
+	ft_putendl("*--- Key events ---*");
+	t_fdf_data	*data;
+
+	data = (t_fdf_data*)malloc(sizeof(t_fdf_data));
+	data->mlx = mlx;
+	data->map = map;
+	data->cam = cam;
+
+	draw_map(data->mlx, data->map);
 	ft_putendl("!!! MISE EN BOUCLE INFINIE !!!");
+	mlx_key_hook(mlx->mlx_win, window_event, (void*)data);
 	mlx_loop(mlx->mlx_ptr);
 
 }

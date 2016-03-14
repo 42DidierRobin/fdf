@@ -6,12 +6,28 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 16:30:10 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/10 18:12:35 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/14 12:43:38 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//TEMP
+#include <stdio.h>
+//TEMP
+
 #include "../includes/file_de_fer.h"
 
+//TEMP
+void				print_cam(t_cam *cam)
+{
+	ft_putstr("Valeur de la camera actuelle : \n    Position: ");
+	print_point(cam->pos);
+	ft_putstr("    Angle: ");
+	printf(" (%f, %f, %f)\n", cam->rot->x, cam->rot->y, cam->rot->z);
+	ft_putstr("    fov: ");
+	ft_putnbr(cam->fov);
+	ft_putchar('\n');
+}
+//TEMP
 
 t_cam				*new_cam(t_3Dpoint *pos, t_3Dpoint *rot, double fov)
 {
@@ -24,31 +40,36 @@ t_cam				*new_cam(t_3Dpoint *pos, t_3Dpoint *rot, double fov)
 	return (ret);
 }
 
-/*
-void				vision_zoom(t_cam *c, int zoom)
+
+void				move_cam(t_cam *cam, int key)
 {
-	c->r = c->r + zoom;
-
-	c->carth->x = c->r * cos(c->theta) * cos(c->phi);
-	c->carth->y = c->r * sin(c->theta) * cos (c->phi);
-	c->carth->z = c->r * sin(c->phi); 
+	if (key == 12)
+		cam->pos->x = cam->pos->x + CAM_STEP;
+	else if (key == 0)
+		cam->pos->x = cam->pos->x - CAM_STEP;
+	else if (key == 13)
+		cam->pos->y = cam->pos->y + CAM_STEP;
+	else if (key == 1)
+		cam->pos->y = cam->pos->y - CAM_STEP;
+	else if (key == 14)
+		cam->pos->z = cam->pos->z + CAM_STEP;
+	else if (key == 2)
+		cam->pos->z = cam->pos->z - CAM_STEP;
+	else if (key == 15)
+		cam->rot->x = cam->rot->x + (double)CAM_STEP / 100;
+	else if (key == 3)
+		cam->rot->x = cam->rot->x - (double)CAM_STEP / 100;
+	else if (key == 16)
+		cam->rot->y = cam->rot->y + (double)CAM_STEP / 100;
+	else if (key == 4)
+		cam->rot->y = cam->rot->y - (double)CAM_STEP / 100;
+	else if (key == 17)
+		cam->rot->z = cam->rot->z + (double)CAM_STEP / 100;
+	else if (key == 5)
+		cam->rot->z = cam->rot->z - (double)CAM_STEP / 100;
+	else if (key == 24)
+		cam->fov = cam->fov + CAM_STEP * 10;
+	else if (key == 27)
+		cam->fov = cam->fov - CAM_STEP * 10;
+	print_cam(cam);
 }
-
-void				vision_rot1(t_cam *c, double angle)
-{
-	c->theta = c->theta + angle;
-
-	c->carth->x = c->r * cos(c->theta) * cos(c->phi);
-	c->carth->y = c->r * sin(c->theta) * cos (c->phi);
-	c->carth->z = c->r * sin(c->phi); 
-}
-
-void				vision_rot2(t_cam *c, double angle)
-{
-	c->phi = c->phi + angle;
-
-	c->carth->x = c->r * cos(c->theta) * cos(c->phi);
-	c->carth->y = c->r * sin(c->theta) * cos (c->phi);
-	c->carth->z = c->r * sin(c->phi); 
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 10:53:21 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/10 17:47:44 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/14 10:18:01 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ t_color             *new_color(int z, t_map *map)
 {
     t_color *clr;
 
-    clr = (t_color*)malloc(sizeof(t_color));
-    
-
+	z++;
+	if (map)
+   		ft_putstr("youpi");	
+	clr = (t_color*)malloc(sizeof(t_color));
+	
+	return (clr);
 }
 
 t_pix				*new_pix(int x, int y, int clr)

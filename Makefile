@@ -6,7 +6,7 @@
 #    By: adespond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/18 14:14:20 by adespond          #+#    #+#              #
-#    Updated: 2016/02/02 18:22:16 by rdidier          ###   ########.fr        #
+#    Updated: 2016/03/14 13:23:51 by rdidier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJ		=	$(patsubst src/%.c,./%.o,$(SRC))
 
 FLAG	=	-Wall -Werror -Wextra -framework OpenGL -framework AppKit
 
-MAP		=	maps/42.fdf
+MAP		=	maps/mars.fdf
 
 .SILENT:
 

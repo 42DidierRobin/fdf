@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:17:07 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/10 18:31:02 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/14 13:28:14 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@
 //INTERDIT
 #include <stdio.h>
 
-#define TAB_SIZE_MAX 1000
-#define SEPARATOR ' '
-#define WINDOW_L 600
-#define WINDOW_W 1200
-#define	PAS		10
+#define TAB_SIZE_MAX	 1000
+#define SEPARATOR 		' '
+#define WINDOW_L 		600
+#define WINDOW_W	 	1200
+#define	PAS				10
+#define CAM_STEP		10
 
 // Coordonnees dite homogene. 
 typedef struct		s_3Dpoint
@@ -49,11 +50,11 @@ typedef struct		s_cam
 
 typedef struct      s_color
 {
-    int     r;
-    int     g;
-    int     b;
+    char     r;
+    char     g;
+    char     b;
     int     color;
-}
+}					t_color;
 
 typedef struct		s_pix
 {
@@ -74,8 +75,16 @@ typedef struct		s_map
 	struct s_pix	***map;
 }					t_map;
 
+typedef struct		s_fdf_data
+{
+	t_map			*map;
+	t_cam			*cam;
+	t_mlx			*mlx;
+}					t_fdf_data;
+
 //Camera
 t_cam			*new_cam(t_3Dpoint *pos, t_3Dpoint *rot, double fov);
+void			move_cam(t_cam *cam, int key);
 
 //Matrix.c
 double			**give_null_matrix(int size);
@@ -95,7 +104,7 @@ void			point_homo_to_cart(t_3Dpoint *point);
 t_3Dpoint		*new_3Dpoint(double x, double y, double z);
 
 // Map.c
-void            update_map(t_map *map, t_cam *cam);
+t_map           *update_map(t_map *map, t_cam *cam);
 t_map			*new_map(int ***readed, t_cam *cam);
 
 // Read.c
@@ -103,6 +112,7 @@ int				***read_it(char *file_name);
 
 // Window.c
 t_mlx			*init_window(void);
+int				window_event(int keycode, void *d);
 
 // Draw.c
 void			draw_map(t_mlx *mlx, t_map *map);
