@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:17:07 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/14 18:51:23 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/15 14:14:04 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ typedef struct		s_cam
 
 typedef struct      s_color
 {
-    char     r;
-    char     g;
-    char     b;
+    unsigned char     r;
+    unsigned char     g;
+    unsigned char     b;
 }					t_color;
 
 typedef struct		s_pix

@@ -6,9 +6,13 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 12:20:18 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/14 18:38:26 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/15 14:13:40 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+//TEMP
+#include <stdio.h>
+//TEMP
 
 #include "../includes/file_de_fer.h"
 
@@ -47,7 +51,6 @@ void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b, t_map *map)
 	while (++i < step)
 	{
 		clr = give_color(pix->oldz, map);
-		print_color(clr);
 		put_pix(mlx, pix, clr);
 		pix->x = a->x + round((double)i * xi);
 		pix->y = a->y + round((double)i * yi);

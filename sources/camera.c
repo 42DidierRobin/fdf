@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 16:30:10 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/14 18:22:04 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/15 14:08:54 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void				move_cam(t_cam *cam, int key)
 	else if (key == 38)
 	{
 		cam->amp = cam->amp - (double)CAM_STEP / 100;
-		if (!cam->amp == 0)
+		if (cam->amp == 0)
 			cam->amp = -(double)CAM_STEP / 100;
 	}
 	else if (key == 24)

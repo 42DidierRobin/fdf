@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/14 18:51:26 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/15 14:14:08 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,8 @@ void		print_tests(int ****r)
 
 	cam = new_cam(new_3Dpoint(20,-20,1000), new_3Dpoint(0,-1.3,0), 1000);
 	map = new_map(readed, cam);
-	map->clr_from = new_color(0,0,0);
-	map->clr_to = new_color(255,255,255);
+	map->clr_from = new_color(255,255,255);
+	map->clr_to = new_color(0,255,0);
 /*
     ft_putchar('\n');
 
