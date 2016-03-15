@@ -6,11 +6,23 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 14:41:08 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/14 16:11:39 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/15 18:22:42 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/file_de_fer.h"
+#include "../includes/fil_de_fer.h"
+#include "../includes/fil_de_fer.h"
+
+t_3dpoint		*new_3dpoint(double x, double y, double z)
+{
+	t_3dpoint		*ret;
+
+	ret = (t_3dpoint*)malloc(sizeof(t_3dpoint));
+	ret->x = x;
+	ret->y = y;
+	ret->z = z;
+	return (ret);
+}
 
 double			**give_rotation_matrix_x(double a)
 {
@@ -66,9 +78,15 @@ double			**give_rotation_matrix_z(double a)
 	return (ret);
 }
 
-void		matrix_on_point(t_3Dpoint *point, double **m)
+void			matrix_on_point(t_3dpoint *point, double **m)
 {
-	point->x = m[0][0] * point->x + m[0][1] * point->y + m[0][2] * point->z + m[0][3];
-	point->y = m[1][0] * point->x + m[1][1] * point->y + m[1][2] * point->z + m[1][3];
-	point->z = m[2][0] * point->x + m[2][1] * point->y + m[1][2] * point->z + m[2][3];
+	point->x = m[0][0] * point->x
+		+ m[0][1] * point->y
+		+ m[0][2] * point->z + m[0][3];
+	point->y = m[1][0] * point->x
+		+ m[1][1] * point->y
+		+ m[1][2] * point->z + m[1][3];
+	point->z = m[2][0] * point->x
+		+ m[2][1] * point->y
+		+ m[1][2] * point->z + m[2][3];
 }

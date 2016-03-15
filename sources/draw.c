@@ -6,34 +6,15 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 12:20:18 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/15 14:13:40 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/15 22:04:20 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//TEMP
-#include <stdio.h>
-//TEMP
-
-#include "../includes/file_de_fer.h"
-
-//TEMP
-void			print_color(t_color *clr)
-{
-	ft_putstr("Couleur : (r=");
-	ft_putnbr(clr->r);
-	ft_putstr(" ;g=");
-	ft_putnbr(clr->g);
-	ft_putstr(" ;b=");
-	ft_putnbr(clr->b);
-	ft_putstr(")\n");
-}
-//TEMP
+#include "../includes/fil_de_fer.h"
 
 void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b, t_map *map)
 {
-	double		xi;
-	double		yi;
-	double		zi;
+	double		xyzi[3];
 	int			i;
 	int			step;
 	t_pix		*pix;
@@ -43,18 +24,18 @@ void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b, t_map *map)
 	pix = new_pix(a->x, a->y, a->oldz);
 	if (abs(a->x - b->x) <= abs(a->y - b->y))
 		step = 1 + abs(a->y - b->y);
-	else 
+	else
 		step = 1 + abs(a->x - b->x);
-	xi = (double)(b->x - a->x) / step;
-	yi = (double)(b->y - a->y) / step;
-	zi = (double)(b->oldz - a->oldz) / step;
+	xyzi[0] = (double)(b->x - a->x) / step;
+	xyzi[1] = (double)(b->y - a->y) / step;
+	xyzi[2] = (double)(b->oldz - a->oldz) / step;
 	while (++i < step)
 	{
 		clr = give_color(pix->oldz, map);
 		put_pix(mlx, pix, clr);
-		pix->x = a->x + round((double)i * xi);
-		pix->y = a->y + round((double)i * yi);
-		pix->oldz = a->oldz + round((double)i * zi);
+		pix->x = a->x + round((double)i * xyzi[0]);
+		pix->y = a->y + round((double)i * xyzi[1]);
+		pix->oldz = a->oldz + round((double)i * xyzi[2]);
 		free(clr);
 	}
 	free(pix);
@@ -62,26 +43,45 @@ void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b, t_map *map)
 
 static void		draw_map_column(t_mlx *mlx, t_map *map, int j)
 {
-		int	i;
+	int	i;
 
-		i = 0;
-		while (map->map[i + 1])
-		{
-			draw_line(mlx, map->map[i][j], map->map[i + 1][j], map);
-			i++;
-		}
+	i = 0;
+	while (map->map[i + 1])
+	{
+		draw_line(mlx, map->map[i][j], map->map[i + 1][j], map);
+		i++;
+	}
 }
 
 static void		draw_map_line(t_mlx *mlx, t_map *map, int i)
 {
-		int	j;
+	int	j;
 
-		j = 0;
-		while (map->map[i][j + 1])
+	j = 0;
+	while (map->map[i][j + 1])
+	{
+		draw_line(mlx, map->map[i][j], map->map[i][j + 1], map);
+		j++;
+	}
+}
+
+void			draw_map_point(t_mlx *mlx, t_map *map)
+{
+	t_pix	*pix;
+	int		i;
+	int		j;
+
+	pix = new_pix(0, 0, 0);
+	i = -1;
+	while (map->map[++i])
+	{
+		j = -1;
+		while (map->map[i][++j])
 		{
-			draw_line(mlx, map->map[i][j], map->map[i][j + 1], map);
-			j++;
+			pix = map->map[i][j];
+			put_pix(mlx, pix, give_color(pix->oldz, map));
 		}
+	}
 }
 
 void			draw_map(t_mlx *mlx, t_map *map)

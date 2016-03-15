@@ -6,11 +6,11 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 12:27:04 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/14 15:51:49 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/15 17:24:21 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/file_de_fer.h"
+#include "../includes/fil_de_fer.h"
 
 double			**give_null_matrix(int size)
 {
@@ -30,7 +30,7 @@ double			**give_null_matrix(int size)
 	return (ret);
 }
 
-double			**give_translation_matrix(t_3Dpoint *vector)
+double			**give_translation_matrix(t_3dpoint *vector)
 {
 	double	**ret;
 
@@ -44,7 +44,7 @@ double			**give_translation_matrix(t_3Dpoint *vector)
 	ret[2][3] = vector->z;
 	return (ret);
 }
-	
+
 double			**give_homothety_matrix(int factor)
 {
 	double	**ret;
@@ -74,7 +74,7 @@ double			**mult_matrix(double **m, double **n, int size)
 		{
 			temp = 0;
 			k = -1;
-			while ( ++k < size)
+			while (++k < size)
 				temp = temp + m[i][k] * n[k][j];
 			ret[i][j] = temp;
 		}
@@ -93,7 +93,7 @@ double			**add_matrix(double **m, double **n, int size)
 	while (++i < size)
 	{
 		j = -1;
-		while(++j < size)
+		while (++j < size)
 			ret[i][j] = m[i][j] + n[i][j];
 	}
 	return (ret);

@@ -6,47 +6,48 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 10:53:21 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/15 14:08:19 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/15 22:06:28 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/file_de_fer.h"
+#include "../includes/fil_de_fer.h"
 
 t_color				*give_color(int z, t_map *map)
 {
 	double		coef;
-	double		r;
-	double		g;
-	double		b;
+	double		rgb[3];
 
-	if (z == map->zmin)
-		return (new_color(map->clr_from->r, map->clr_from->g, map->clr_from->b));
+	if (z == 0)
+		return (new_color(map->clr_from->r,
+					map->clr_from->g, map->clr_from->b));
+	else if (z < 0)
+		z = -z;
 	else if (z == map->zmax)
 		return (new_color(map->clr_to->r, map->clr_to->g, map->clr_to->b));
-	coef = (double)z / (double)(map->zmax - map->zmin);
+	coef = (double)z / (double)(map->zmax);
 	if (map->clr_to->r - map->clr_from->r)
-		r = (double)(map->clr_to->r - map->clr_from->r) * coef;
+		rgb[0] = (double)(map->clr_to->r - map->clr_from->r) * coef;
 	else
-		r = map->clr_to->r;
+		rgb[0] = map->clr_to->r;
 	if (map->clr_to->g - map->clr_from->g)
-		g = (double)(map->clr_to->g - map->clr_from->g) * coef;
+		rgb[1] = (double)(map->clr_to->g - map->clr_from->g) * coef;
 	else
-		g = map->clr_to->g;
+		rgb[1] = map->clr_to->g;
 	if (map->clr_to->b - map->clr_from->b)
-		b = (double)(map->clr_to->b - map->clr_from->b) * coef;
+		rgb[2] = (double)(map->clr_to->b - map->clr_from->b) * coef;
 	else
-		b = map->clr_to->b;
-	return (new_color((char)r, (char)g, (char)b));
+		rgb[2] = map->clr_to->b;
+	return (new_color((char)rgb[0], (char)rgb[1], (char)rgb[2]));
 }
 
-t_color             *new_color(char r, char g, char b)
+t_color				*new_color(char r, char g, char b)
 {
-    t_color *clr;
+	t_color		*clr;
 
 	clr = (t_color*)malloc(sizeof(t_color));
-	clr->r =r;
-	clr->g =g;
-	clr->b =b;
+	clr->r = r;
+	clr->g = g;
+	clr->b = b;
 	return (clr);
 }
 

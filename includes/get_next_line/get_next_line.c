@@ -6,41 +6,41 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 20:20:33 by rdidier           #+#    #+#             */
-/*   Updated: 2016/01/19 15:26:22 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/15 22:18:14 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "get_next_line.h"
 
-static void       	update_data(t_data **dataf, t_data **data, int fd)
+static void			update_data(t_data **dataf, t_data **data, int fd)
 {
-    if (*dataf == NULL)
-    {
-        *dataf = (t_data*)malloc(sizeof(t_data));
-        (*dataf)->fd = fd;
-        (*dataf)->buff = NULL;
-        (*dataf)->next = (t_data*)malloc(sizeof(t_data));
-        (*dataf)->next->fd = -1;
-        *data = *dataf;
-    }
-    *data = *dataf;
-    while ((*data)->fd >= 0 && (*data)->fd != fd)
-        (*data) = (*data)->next;
-    if ((*data)->fd < 0)
-    {
-        (*data)->fd = fd;
-        (*data)->buff = NULL;
-        (*data)->next = (t_data*)malloc(sizeof(t_data));
-        (*data)->next->fd = -1;
-    }
+	if (*dataf == NULL)
+	{
+		*dataf = (t_data*)malloc(sizeof(t_data));
+		(*dataf)->fd = fd;
+		(*dataf)->buff = NULL;
+		(*dataf)->next = (t_data*)malloc(sizeof(t_data));
+		(*dataf)->next->fd = -1;
+		*data = *dataf;
+	}
+	*data = *dataf;
+	while ((*data)->fd >= 0 && (*data)->fd != fd)
+		(*data) = (*data)->next;
+	if ((*data)->fd < 0)
+	{
+		(*data)->fd = fd;
+		(*data)->buff = NULL;
+		(*data)->next = (t_data*)malloc(sizeof(t_data));
+		(*data)->next->fd = -1;
+	}
 }
 
 static char			*concatain(t_data *data, char *str)
 {
 	int		i;
-	int 	len;
-	int 	len2;
+	int		len;
+	int		len2;
 	char	*ret;
 
 	i = -1;
@@ -84,8 +84,8 @@ void				update(t_data **data, int i, int ret)
 		ft_strdel(&(*data)->buff);
 		(*data)->buff = tmp;
 	}
-    else
-        ft_strdel(&(*data)->buff);
+	else
+		ft_strdel(&(*data)->buff);
 }
 
 int					get_next_line(int const fd, char **line)
@@ -93,10 +93,10 @@ int					get_next_line(int const fd, char **line)
 	int				ret;
 	int				i;
 	char			*line_ret;
-	t_data      	*data;
+	t_data			*data;
 	static t_data	*dataf;
 
-    ret = 1;
+	ret = 1;
 	line_ret = NULL;
 	if (fd < 0 || !line)
 		return (-1);
