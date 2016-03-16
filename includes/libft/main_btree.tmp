@@ -1,0 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_btree.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/05 09:11:49 by rdidier           #+#    #+#             */
+/*   Updated: 2015/12/05 10:33:14 by rdidier          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int		main(void)
+{
+	t_btree	*root;
+	t_btree	*a;
+	t_btree	*b;
+	t_btree	*c;
+	t_btree	*d;
+	t_btree	*e;
+	t_btree	*f;
+	void	*func;
+
+	func = &ft_btree_strprint;
+	root = ft_btree_new("Chocolat", 9);
+	a = ft_btree_new("Fromage", 8);
+	b = ft_btree_new("Playstation", 12);
+	c = ft_btree_new("Peroquet", 9);
+	d = ft_btree_new("Musique", 8);
+	e = ft_btree_new("BOOOM", 6);
+	f = ft_btree_new("Babyyyy", 8);
+
+	root->right = a;
+	root->left = b;
+	a->right = c;
+	a->left = d;
+	b->right = e;
+	b->left = f;
+
+	ft_putstr("Parcour infixe :\n");
+	ft_btree_mapinf(root, func);
+	ft_putchar('\n');
+	ft_putstr("Parcour prefixe :\n");
+	ft_btree_mappre(root, func);
+	ft_putchar('\n');
+	ft_putstr("Parcour postfix :\n");
+	ft_btree_mappost(root, func);
+	ft_putchar('\n');
+	
+	return (0);
+}

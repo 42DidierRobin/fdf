@@ -6,7 +6,7 @@
 #    By: adespond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/18 14:14:20 by adespond          #+#    #+#              #
-#    Updated: 2016/03/15 18:17:01 by rdidier          ###   ########.fr        #
+#    Updated: 2016/03/16 14:25:10 by rdidier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ MAP		=	maps/pentenegpos.fdf
 .SILENT:
 
 $(NAME): $(OBJ)
+	make -C includes/libft/
 	gcc $(FLAG) $(OBJ)  -L/usr/local/lib -lmlx -L includes/libft/ -lft -o $(NAME)
 	printf '\033[4m'
 	printf '\033[32m[ ✔ ] %s\n\033[0m' "fdf is done !"
@@ -41,10 +42,12 @@ $(NAME): $(OBJ)
 
 clean:
 	/bin/rm -rf *.o
+	make -C includes/libft/ clean
 	printf '\033[31m[ ✔ ] %s\n\033[0m' "Clean"
 
 fclean: clean
 	/bin/rm -f $(NAME)
+	make -C includes/libft/ fclean
 	printf '\033[31m[ ✔ ] %s\n\033[0m' "Fclean"
 
 javel:
