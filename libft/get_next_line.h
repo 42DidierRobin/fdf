@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/01 12:24:40 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/17 10:59:33 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/17 11:03:32 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct		s_gnld
 {
 	int				fd;
 	char			*buff;
-	struct s_data	*next;
+	struct s_gnld	*next;
 }					t_gnld;
 
 int					get_next_line(int const fd, char **line);
