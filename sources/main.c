@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:15:02 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/17 11:19:48 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/17 11:31:56 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,15 @@ int		main(int argc, char **argv)
 
 	ret = 1;
 	if (argc == 2)
+	{
 		ret = launch_it(argv[1],
 				ft_strsplit("255,255,255", ','),
 				ft_strsplit("0,0,0", ','));
-	else if (argc == 4)
-		if (argc < 2 || argc > 4)
-		{
-			ft_putendl("Error args. Example : ../map.fdf 0,0,0 255,255,255");
-			return (0);
-		}
-		else
-		{
-			if (check_color(argv[2]) && check_color(argv[3]))
-				if (argc == 2)
-					ret = launch_it(argv[1],
-							ft_strsplit("255,255,255", ','),
-							ft_strsplit("0,0,0", ','));
-				else
-					ret = launch_it(argv[1],
-							ft_strsplit(argv[2], ','),
-							ft_strsplit(argv[3], ','));
-			else
-				ft_putendl("Error args. Example : ../map.fdf 0,0,0 255,255,255");
-		}
+	}
+	else if (argc == 4 && check_color(argv[2]) && check_color(argv[3]))
+		ret = launch_it(argv[1],
+				ft_strsplit("255,255,255", ','),
+				ft_strsplit("0,0,0", ','));
 	else
 		ft_putendl("Error args. Example : ../map.fdf 0,0,0 255,255,255");
 	if (!ret)
