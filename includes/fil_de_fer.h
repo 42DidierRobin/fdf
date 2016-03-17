@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:17:07 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/15 22:12:25 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/16 15:26:56 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@
 # include <sys/uio.h>
 # include <stdlib.h>
 # include <math.h>
-# include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
-# include "mlx.h"
+# include "../libft/libft.h"
+# include <mlx.h>
 
 # define TAB_SIZE_MAX	100000
 # define SEPARATOR 		' '
