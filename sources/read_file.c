@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 15:42:55 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/15 21:26:51 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/17 11:25:31 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int					***read_it(char *file_name)
 	while ((gnl_ret = get_next_line(fd, &(tab[++i]))))
 		if (i > TAB_SIZE_MAX)
 			return (NULL);
-	if (!tab[0][0])
+	if (!tab || !tab[0] || !tab[0][0])
 		return (NULL);
 	tab[i] = NULL;
 	ret = (int***)malloc(sizeof(int**) * i + 1);
