@@ -6,7 +6,7 @@
 /*   By: rdidier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 10:40:09 by rdidier           #+#    #+#             */
-/*   Updated: 2016/03/17 11:25:42 by rdidier          ###   ########.fr       */
+/*   Updated: 2016/03/22 11:29:21 by rdidier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int			launch_it(char *file, char **from, char **to)
 	int			***read_ret;
 
 	read_ret = read_it(file);
-	if (!read_ret || !read_ret[0] || !read_ret[0][0])
+	if (!read_ret)
 		return (0);
 	data = (t_fdf_data*)malloc(sizeof(t_fdf_data));
 	data->mlx = init_window();
@@ -69,7 +69,7 @@ int			launch_it(char *file, char **from, char **to)
 	clr_to = new_color((unsigned char)ft_atoi(to[0]),
 			(unsigned char)ft_atoi(to[1]), (unsigned char)ft_atoi(to[2]));
 	data->cam = new_cam(new_3dpoint(0, 0, 1000), new_3dpoint(0, 0, 0), 2600);
-	data->map = new_map(read_it(file), data->cam);
+	data->map = new_map(read_ret, data->cam);
 	data->map->clr_from = clr_from;
 	data->map->clr_to = clr_to;
 	draw_map(data->mlx, data->map);
