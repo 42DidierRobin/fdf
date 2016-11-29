@@ -40,3 +40,6 @@ Result -> 125/100
 
 ## Picture
 
+![Alt text](/screenshots/42?raw=true "42")
+![Alt text](/screenshots/mars?raw=true "Mars")
+
