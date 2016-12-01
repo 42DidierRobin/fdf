@@ -9,9 +9,9 @@ Result -> 125/100
 
 ## About
 ####Skills
-Rigor 
-Algorithms & AI 
-Imperative programming 
+Rigor |
+Algorithms & AI |
+Imperative programming |
 Graphics
 ####Keywords
 42, project, C, Matrix, Raytracing, Graphic, 2D, 3D, modelization, Camera, tranformation, projection, wireframe, segment
